@@ -1,0 +1,112 @@
+# Set environment for processes
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+export JAVA_HOME=${JAVA_8_HOME}
+
+# Enable color in command line and 'less'
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Set default text editor
+export EDITOR=/usr/bin/vim
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+if [[ ${SHELL} == *"bash" ]]; then
+  # Enable some Bash 4 features when possible:
+  # autocd: e.g. `**/qux` will enter `./foo/bar/baz/qux`
+  # cdspell: Autocorrect typos in path names when using `cd`
+  # globstar: Recursive globbing, e.g. `echo **/*.txt`
+  # histappend: Append to the Bash history file, rather than overwriting it
+  # nocaseglob: Case-insensitive globbing (used in pathname expansion)
+  for option in autocd cdspell globstar histappend nocaseglob; do
+    shopt -s "$option" 2> /dev/null
+  done;
+fi
+
+## AWS
+# Set environment for AWS access
+export AWS_DEFAULT_REGION="us-east-1"
+export AWS_CREDENTIAL_FILE=~/.aws/credentials
+
+# AWS Account Manager
+[[ -s ${HOME}/.awsam/bash.rc ]] && source ${HOME}/.awsam/bash.rc &>/dev/null
+
+## Programming paths
+# Go environment
+export GOPATH=~/repos/gocode
+
+# Python virtual environments
+export WORKON_HOME=${HOME}/.virtualenvs
+export PROJECT_HOME=${HOME}/repos/workspace
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
+# Link Brew Cask applications to normal location
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+## TAB completion
+# Load Ruby's rbenv
+if which rbenv &> /dev/null; then  eval "$(rbenv init -)"; fi
+
+# Load pyenv autocompletion
+if which pyenv &> /dev/null; then  eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init &> /dev/null; then  eval "$(pyenv virtualenv-init -)"; fi
+
+if [[ ${SHELL} == *"bash" ]]; then
+  # Brewed Bash command tab completion
+  if which brew &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    source "$(brew --prefix)/etc/bash_completion"
+  elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
+
+  # Enable tab completion for `g` by marking it as an alias for `git`
+  if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    complete -o default -o nospace -F _git g
+  fi
+
+  # Add tab completion for `defaults read|write NSGlobalDomain`
+  # You could just use `-g` instead, but I like being explicit
+  complete -W "NSGlobalDomain" defaults;
+
+  # Add `killall` tab completion for common apps
+  ##complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+  # AWS shell command completion
+  [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
+
+  # kubectl completion
+  [[ -f /usr/local/etc/bash_completion.d/kubectl ]] && source /usr/local/etc/bash_completion.d/kubectl &>/dev/null
+
+  # direnv execution
+  if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
+
+  # SSH hostnames
+  [[ -f /usr/local/etc/bash_completion.d/ssh_hosts ]] && source /usr/local/etc/bash_completion.d/ssh_hosts &>/dev/null
+else
+## Assume zsh
+  # AWS shell command completion
+  [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh &>/dev/null
+
+  # kubectl completion
+  source <(kubectl completion zsh)
+
+  # direnv execution
+  if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
+
+  # SSH hostnames
+  [[ -f /usr/local/share/zsh-completions/_ssh ]] && source /usr/local/share/zsh-completions/_ssh
+
+  # AWLESS
+  source <(awless completion zsh)
+fi
+
+# Google Cloud shell command completion
+[[ -f ${HOME}/repos/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/repos/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
+
+# iTerm2 shell integration
+[[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
+

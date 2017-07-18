@@ -1,0 +1,4 @@
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:/usr/local/sbin:${GOROOT}/bin:${HOME}/bin:${PATH}
+
+# Add rbenv to PATH so that it loads every time you open a terminal
+export PATH="${HOME}/.rbenv/bin:${PATH}"
