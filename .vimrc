@@ -38,7 +38,6 @@ Plugin 'editorconfig-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
 
 " All Vundle plugins must be added before the following line
 call vundle#end()            " Required
@@ -48,9 +47,9 @@ filetype indent on   " Enable filetype-specific identing
 filetype plugin on   " Enable filetype-specific plugins
 
 " Enable indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 30
-" let g:indent_guides_guide_size = 1
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_color_change_percent = 3
+"let g:indent_guides_guide_size = 1
 
 " Use '|' for table ends
 let g:table_mode_corner="|"
