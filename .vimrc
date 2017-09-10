@@ -38,6 +38,7 @@ Plugin 'editorconfig-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " All Vundle plugins must be added before the following line
 call vundle#end()            " Required
@@ -70,8 +71,9 @@ colorscheme distinguished
 let mapleader=","
 
 " Don’t add empty newlines at the end of files
-set binary
-set noeol
+autocmd  FileType binary setlocal noeol
+" set binary
+" set noeol
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
