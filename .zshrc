@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/Users/cgwong/.oh-my-zsh
+export ZSH=/Users/cgwong/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -40,6 +40,9 @@ POWERLEVEL9K_MODE="awesome-fontconfig"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Disable update prompt (auto update)
+DISABLE_UPDATE_PROMPT=true
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
@@ -76,7 +79,7 @@ plugins=(git git-extras git-flow aws brew docker jsontools pip npm vagrant)
 
 # User configuration
 
-# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="${HOME}/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
