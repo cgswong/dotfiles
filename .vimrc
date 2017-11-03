@@ -1,12 +1,12 @@
 set nocompatible     " Make Vim more useful
 
-set rtp+=~/.vim/bundle/Vundle.vim		 " set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize
 " Keep Plugin commands between vundle#begin/end.
-call vundle#begin()									 " Required
-"call vundle#begin('~/.vim/vundle')		" alternatively, pass a path where Vundle should install plugins
+call vundle#begin()                   " Required
+"call vundle#begin('~/.vim/vundle')    " alternatively, pass a path where Vundle should install plugins
 
 " Core
-Plugin 'VundleVim/Vundle.vim' 	" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'   " let Vundle manage Vundle, required
 Plugin 'L9'
 
 " File management
@@ -80,58 +80,78 @@ set backupdir=~/.vim/backups
 set backupskip=/tmp/*,/private/tmp/*    " No backups when editing files in certain directories
 set directory=~/.vim/swaps
 if exists("&undodir")
-	set undodir=~/.vim/undo
+  set undodir=~/.vim/undo
 endif
 
 " Enable per-directory .vimrc files and disable unsafe commands in them
 set exrc
 set secure
 
-syntax on			" Enable syntax highlighting
-set shortmess=atI			" Don’t show the intro message when starting Vim
-set cursorline			" Highlight current line
-set laststatus=2			" Always show status line
-set nostartofline			" Don’t reset cursor to start of line when moving around.
-set ruler			" Show the cursor position
-set showmode			" Show the current mode
-set title			" Show the filename in the window titlebar
-set number			" Display line numbers
-" Use relative line numbers
-" if exists("&relativenumber")
-" 	set relativenumber
-" 	au BufReadPost * set relativenumber
-" endif
-set scrolloff=3			" Start scrolling 3 lines before the horizontal window border
+syntax on      " Enable syntax highlighting
+set shortmess=atI     " Don’t show the intro message when starting Vim
+set cursorline        " Highlight current line
+set laststatus=2      " Always show status line
+set nostartofline     " Don’t reset cursor to start of line when moving around.
+set ruler             " Show the cursor position
+set showmode          " Show the current mode
+set title             " Show the filename in the window titlebar
+set number            " Display line numbers
+" Relative numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunc
 
-set ttyfast			" Optimize for fast terminal connections
-set encoding=utf-8 nobomb			" Use UTF-8 without BOM
-set noerrorbells			" Disable error bells
-" set mouse=a			" Enable mouse in all modes
-set mouse=r			" Enable mouse in read mode
+" Toggle between normal and relative numbering.
+nnoremap <leader>r :call NumberToggle()<cr>
 
-set expandtab			" Use spaces instead of tabs
-set tabstop=2     " 2 spaces for tabs
-set shiftwidth=2  " 2 spaces for indentation
+set scrolloff=3      " Start scrolling 3 lines before the horizontal window border
 
-set clipboard=unnamed			" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set gdefault 			" Add the g flag to search/replace by default
-set hlsearch			" Highlight searches
-set incsearch			" Highlight dynamically as pattern is typed
-set esckeys			" Allow cursor keys in insert mode
-set backspace=indent,eol,start		" Allow backspace in insert mode
-set showcmd			" Show the (partial) command as it’s being typed
-set wildmenu			" Enhance command-line completion
-set showmatch			" Show matching brackets
-set paste			" Disable indented paste
-set pastetoggle=<F2>			" Use F2 shortcut for indent on paste toggle
+set ttyfast                    " Optimize for fast terminal connections
+set encoding=utf-8 nobomb      " Use UTF-8 without BOM
+set noerrorbells               " Disable error bells
+" set mouse=a      " Enable mouse in all modes
+set mouse=r      " Enable mouse in read mode
+
+set expandtab      " Use spaces instead of tabs
+set tabstop=2      " 2 spaces for tabs
+set shiftwidth=2   " 2 spaces for indentation
+set nofoldenable   " Disable automatic folding
+
+set clipboard=unnamed             " Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set ignorecase                    " Make searching case insensitive
+set smartcase                     " ... unless the query has capital letters.
+set gdefault                      " Add the g flag to search/replace by default
+set magic                         " Use 'magic' patterns (extended regular expressions).
+set hlsearch                      " Highlight searches
+set incsearch                     " Highlight dynamically as pattern is typed
+set esckeys                       " Allow cursor keys in insert mode
+set backspace=indent,eol,start    " Allow backspace in insert mode
+set showcmd                       " Show the (partial) command as it’s being typed
+set wildmenu                      " Enhance command-line completion
+set showmatch                     " Show matching brackets
+set paste                         " Disable indented paste
+set pastetoggle=<F2>              " Use F2 shortcut for indent on paste toggle
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
+" Search and Replace
+nmap <Leader>s :%s//<Left>
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
@@ -139,12 +159,12 @@ noremap <leader>ss :call StripWhitespace()<CR>
 
 " Automatic commands
 if has("autocmd")
-	" Enable file type detection
-	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
-	" Treat .md files as Markdown
-	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+  " Enable file type detection
+  filetype on
+  " Treat .json files as .js
+  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+  " Treat .md files as Markdown
+  autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
 
 " Use octodown as default build command for Markdown files
@@ -152,3 +172,14 @@ autocmd FileType markdown let b:dispatch = 'octodown --live-reload %'
 
 " Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Specify which characters to show for expanded TABs,
+" trailing whitespace, and end-of-lines.
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+set list                " Show problematic characters.
+
+" Highlight all tabs and trailing whitespace characters.
+"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+"match ExtraWhitespace /\s\+$\|\t/
