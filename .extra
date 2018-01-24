@@ -90,7 +90,7 @@ else
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh &>/dev/null
 
   # kubectl completion
-  source <(kubectl completion zsh)
+  [[ -f ${HOME}/bin/kubectl ]] && source <(kubectl completion zsh)
 
   # direnv execution
   if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
@@ -109,5 +109,5 @@ fi
 [[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
 
 # NVM integrations
-export NVM_DIR="$HOME/.nvm"
-[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
+#export NVM_DIR="$HOME/.nvm"
+#[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
