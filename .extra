@@ -7,7 +7,7 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Set default text editor
-export EDITOR=/usr/bin/vim
+export EDITOR=vim
 
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
@@ -20,8 +20,8 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 export AWS_DEFAULT_REGION="us-east-1"
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
-# AWS Account Manager
-[[ -s ${HOME}/.awsam/bash.rc ]] && source ${HOME}/.awsam/bash.rc &>/dev/null
+# Kubernetes
+[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/config-eks || KUBECONFIG=${KUBECONFIG}:${HOME}/.kube/config-eks
 
 ## Programming paths
 # Go environment
@@ -111,3 +111,14 @@ fi
 # NVM integrations
 #export NVM_DIR="$HOME/.nvm"
 #[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
+
+# Travis
+[ -f /Users/cgwong/.travis/travis.sh ] && source /Users/cgwong/.travis/travis.sh
+
+## Serverless
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
