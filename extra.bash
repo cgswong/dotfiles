@@ -1,7 +1,4 @@
 # Set environment for processes
-export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
-export JAVA_HOME=${JAVA_8_HOME}
-
 # Enable color in command line and 'less'
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -25,7 +22,7 @@ export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
 ## Programming paths
 # Go environment
-[[ -d ${HOME}/repos/gocode ]] && export GOPATH=${HOME}/repos/gocode
+[[ -d ${HOME}/workspace/gocode ]] && export GOPATH=${HOME}/workspace/gocode
 
 # Python virtual environments
 [[ -d ${HOME}/.virtualenvs ]] && export WORKON_HOME=${HOME}/.virtualenvs
@@ -55,9 +52,9 @@ if [[ ${SHELL} == *"bash" ]]; then
   done;
 
   # Brewed Bash command tab completion
-  if which brew &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    source "$(brew --prefix)/etc/bash_completion"
-  elif [ -f /etc/bash_completion ]; then
+  if which brew &> /dev/null && [[ -f "/usr/local/etc/bash_completion" ]]; then
+    source "/usr/local/etc/bash_completion"
+  elif [[ -f /etc/bash_completion ]]; then
     source /etc/bash_completion
   fi
 
@@ -94,9 +91,6 @@ else
 
   # SSH hostnames
   [[ -f /usr/local/share/zsh-completions/_ssh ]] && source /usr/local/share/zsh-completions/_ssh
-
-  # AWLESS
-  source <(awless completion zsh)
 fi
 
 # Google Cloud shell command completion
@@ -106,8 +100,8 @@ fi
 [[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
 
 # NVM integrations
-[[ -d ${HOME}/.nvm ]] && export NVM_DIR="$HOME/.nvm"
-[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
+[[ -d ${HOME}/.nvm ]] && export NVM_DIR="${HOME}/.nvm"
+[[ -f "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh"
 
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh

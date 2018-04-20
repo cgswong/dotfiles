@@ -12,13 +12,13 @@ pathmunge () {
 }
 
 # PATH
-[[ -d /usr/local/opt/openssl/bin ]] && pathmunge /usr/local/opt/openssl/bin
+[[ -d "/usr/local/opt/openssl@1.1/bin" ]] && pathmunge "/usr/local/opt/openssl@1.1/bin"
 [[ -d /usr/local/sbin ]] && pathmunge /usr/local/sbin
 # Add personal bin to $PATH
 [[ -d ${HOME}/.local/bin ]] && pathmunge ${HOME}/.local/bin
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
 # Homebrew coreutils
-[[ -d $(brew --prefix coreutils)/libexec/gnubin ]] && pathmunge "$(brew --prefix coreutils)/libexec/gnubin"
+[[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin
 # GoLang
 [[ -d ${GOROOT}/bin ]] && pathmunge ${GOROOT}/bin
 # Add rbenv to PATH so that it loads every time you open a terminal
