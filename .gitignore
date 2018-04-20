@@ -49,6 +49,7 @@ Thumbs.db
 .pem
 .pub
 .creds
+creds.*
 
 # Chef
 Berksfile.lock
