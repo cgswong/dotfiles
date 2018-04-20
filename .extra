@@ -21,7 +21,7 @@ export AWS_DEFAULT_REGION="us-east-1"
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
 # Kubernetes
-[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/config-eks || KUBECONFIG=${KUBECONFIG}:${HOME}/.kube/config-eks
+[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/config-ekspreview || KUBECONFIG=${KUBECONFIG}:${HOME}/.kube/config-ekspreview
 
 ## Programming paths
 # Go environment
