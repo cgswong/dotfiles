@@ -201,6 +201,8 @@ function tre() {
 }
 
 # AWS profile management. Sets ACCESS_KEY_ID or SECRET_ACCESS_KEY, but not for role switching. 
-function setaws() {
-  eval $(awsenv $1)
-}
+if which awsenv &>/dev/null; then
+  function setaws() {
+    eval $(awsenv $1)
+  }
+fi

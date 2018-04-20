@@ -25,11 +25,11 @@ export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
 ## Programming paths
 # Go environment
-export GOPATH=~/repos/gocode
+[[ -d ${HOME}/repos/gocode ]] && export GOPATH=${HOME}/repos/gocode
 
 # Python virtual environments
-export WORKON_HOME=${HOME}/.virtualenvs
-export PROJECT_HOME=${HOME}/repos/workspace
+[[ -d ${HOME}/.virtualenvs ]] && export WORKON_HOME=${HOME}/.virtualenvs
+[[ -d ${HOME}/workspace ]] && export PROJECT_HOME=${HOME}/workspace
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Link Brew Cask applications to normal location
@@ -70,9 +70,6 @@ if [[ ${SHELL} == *"bash" ]]; then
   # You could just use `-g` instead, but I like being explicit
   complete -W "NSGlobalDomain" defaults;
 
-  # Add `killall` tab completion for common apps
-  ##complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
-
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
 
@@ -103,17 +100,17 @@ else
 fi
 
 # Google Cloud shell command completion
-[[ -f ${HOME}/repos/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/repos/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
+[[ -f ${HOME}/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
 
 # iTerm2 shell integration
 [[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
 
 # NVM integrations
-#export NVM_DIR="$HOME/.nvm"
-#[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
+[[ -d ${HOME}/.nvm ]] && export NVM_DIR="$HOME/.nvm"
+[[ -f /usr/local/opt/nvm/nvm.sh ]] && . "/usr/local/opt/nvm/nvm.sh"
 
 # Travis
-[ -f /Users/cgwong/.travis/travis.sh ] && source /Users/cgwong/.travis/travis.sh
+[[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
 
 ## Serverless
 # tabtab source for serverless package

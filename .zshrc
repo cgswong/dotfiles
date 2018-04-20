@@ -79,7 +79,7 @@ plugins=(git git-extras git-flow aws brew docker jsontools pip npm vagrant)
 
 # User configuration
 
-export PATH="${HOME}/bin:${HOME}/.local/bin:$PATH"
+source ${HOME}/dotfiles/path.bash
 # export MANPATH="/usr/local/man:$MANPATH"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
