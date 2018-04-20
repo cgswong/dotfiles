@@ -94,7 +94,8 @@ else
 fi
 
 # Google Cloud shell command completion
-[[ -f ${HOME}/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/workspace/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
+[[ -f ${HOME}/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
+[[ -f ${HOME}/gcloud/google-cloud-sdk/completion.$(basename ${SHELL}).inc ]] && source ${HOME}/gcloud/google-cloud-sdk/completion.$(basename ${SHELL}).inc &>/dev/null
 
 # iTerm2 shell integration
 [[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
