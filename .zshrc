@@ -7,7 +7,7 @@ export ZSH=${HOME}/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel9k/powerlevel9k"
-# ZSH_THEME="bullet-train"
+#ZSH_THEME="bullet-train"
 
 # Setup POWERLEVEL9k theme
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -79,7 +79,7 @@ plugins=(git git-extras git-flow aws brew docker jsontools pip npm vagrant)
 
 # User configuration
 
-source ${HOME}/dotfiles/path.bash
+# source ${HOME}/dotfiles/path.bash
 # export MANPATH="/usr/local/man:$MANPATH"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
