@@ -40,6 +40,9 @@ if which rbenv &> /dev/null; then  eval "$(rbenv init -)"; fi
 if which pyenv &> /dev/null; then  eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init &> /dev/null; then  eval "$(pyenv virtualenv-init -)"; fi
 
+# Load nodenv
+if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
+
 if [[ ${SHELL} == *"bash" ]]; then
   # Enable some Bash 4 features when possible:
   # autocd: e.g. `**/qux` will enter `./foo/bar/baz/qux`
@@ -99,10 +102,6 @@ fi
 
 # iTerm2 shell integration
 [[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
-
-# NVM integrations
-[[ -d ${HOME}/.nvm ]] && export NVM_DIR="${HOME}/.nvm"
-[[ -f "/usr/local/opt/nvm/nvm.sh" ]] && . "/usr/local/opt/nvm/nvm.sh"
 
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
