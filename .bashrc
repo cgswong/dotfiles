@@ -18,4 +18,4 @@ if [ -f '/Users/cgwong/google-cloud-sdk/path.bash.inc' ]; then source '/Users/cg
 if [ -f '/Users/cgwong/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/cgwong/google-cloud-sdk/completion.bash.inc'; fi
 
 # Load Bash It
-#ource "$BASH_IT"/bash_it.sh
+#source "$BASH_IT"/bash_it.sh
