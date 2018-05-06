@@ -109,3 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# direnv execution
+if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi

@@ -77,7 +77,7 @@ if [[ ${SHELL} == *"bash" ]]; then
   [[ -f /usr/local/etc/bash_completion.d/kubectl ]] && source /usr/local/etc/bash_completion.d/kubectl &>/dev/null
 
   # direnv execution
-  if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
+  #if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
 
   # SSH hostnames
   [[ -f /usr/local/etc/bash_completion.d/ssh_hosts ]] && source /usr/local/etc/bash_completion.d/ssh_hosts &>/dev/null
@@ -90,7 +90,7 @@ else
   [[ -f ${HOME}/bin/kubectl ]] && source <(kubectl completion zsh)
 
   # direnv execution
-  if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
+  #if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
 
   # SSH hostnames
   [[ -f /usr/local/share/zsh-completions/_ssh ]] && source /usr/local/share/zsh-completions/_ssh

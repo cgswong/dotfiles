@@ -177,7 +177,7 @@
 
 [user]
 	name = Stuart Wong
- 	email = cgs.wong@gmail.com
+	email = cgs.wong@gmail.com
 
 [filter "hawser"]
 	clean = git hawser clean %f
@@ -185,10 +185,10 @@
 	required = true
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+	clean = git-lfs clean -- %f
 
 [difftool]
 	prompt = true

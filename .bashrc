@@ -19,3 +19,6 @@ if [ -f '/Users/cgwong/google-cloud-sdk/completion.bash.inc' ]; then source '/Us
 
 # Load Bash It
 #source "$BASH_IT"/bash_it.sh
+
+# direnv execution
+if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
