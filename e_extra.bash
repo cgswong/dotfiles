@@ -106,6 +106,9 @@ fi
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
 
+# GNU manpages for programs that are from GNU coreutils
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+
 ## Serverless
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

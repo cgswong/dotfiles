@@ -8,7 +8,7 @@ alias j="jobs"
 # Set GNU ls color flag
 colorflag="--color"
 
-# List all files colorized 
+# List all files colorized
 alias l="ls -Fhp ${colorflag}"
 alias ll="ls -lFhp ${colorflag}"
 
@@ -123,6 +123,5 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# GNU manpages for programs that are GNU ones, and fallback to OSX manpages otherwise
-alias man='_() { echo $1; man -M /usr/local/opt/coreutils/libexec/gnuman $1 1>/dev/null 2>&1;  if [ "$?" -eq 0 ]; then man -M /usr/local/opt/coreutils/libexec/gnuman $1; else man $1; fi }; _'
-
+# Unalias _='sudo' for zsh
+unalias _
