@@ -192,3 +192,6 @@
 
 [difftool]
 	prompt = true
+[pager]
+	branch = false
+	tags = false
