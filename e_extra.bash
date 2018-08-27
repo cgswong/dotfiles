@@ -27,7 +27,7 @@ export AWS_CREDENTIAL_FILE=~/.aws/credentials
 # Python virtual environments
 [[ -d ${HOME}/.virtualenvs ]] && export WORKON_HOME=${HOME}/.virtualenvs
 [[ -d ${HOME}/workspace ]] && export PROJECT_HOME=${HOME}/workspace
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Link Brew Cask applications to normal location
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -37,8 +37,11 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 if which rbenv &> /dev/null; then  eval "$(rbenv init -)"; fi
 
 # Load pyenv autocompletion
-if which pyenv &> /dev/null; then  eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init &> /dev/null; then  eval "$(pyenv virtualenv-init -)"; fi
+#if which pyenv &> /dev/null; then  eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init &> /dev/null; then  eval "$(pyenv virtualenv-init -)"; fi
+
+# Load Pipenv autocompletion
+if which pyenv &> /dev/null; then  eval "$(pipenv --completion)"; fi
 
 # Load nodenv
 if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
