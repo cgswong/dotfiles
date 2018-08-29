@@ -1,5 +1,11 @@
-# Compiled Python files
+# Python
 *.pyc
+*.egg
+build/
+dist/
+sdist/
+wheels/
+venv/
 
 # Folder view configuration files
 .DS_Store
@@ -48,10 +54,29 @@ Thumbs.db
 # Security
 .pem
 .pub
-*creds.*
+.creds
 
 # Chef
 Berksfile.lock
+.kitchen
+.bundle
 
 # Packer
 packer_cache
+*.box
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.tfplan
+
+# Serverless
+.serverless
+
+# Documentation
+/site
+docs/_build/
+
+# Ansible
+*.retry
