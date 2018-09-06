@@ -69,7 +69,7 @@ packer_cache
 **/.terraform/*
 *.tfstate
 *.tfstate.*
-.tfplan
+*.tfplan
 
 # Serverless
 .serverless
