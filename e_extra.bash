@@ -18,16 +18,16 @@ export AWS_DEFAULT_REGION="us-east-1"
 export AWS_CREDENTIAL_FILE=~/.aws/credentials
 
 # Kubernetes
-[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/config-ekspreview || KUBECONFIG=${KUBECONFIG}:${HOME}/.kube/config-ekspreview
+[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config
 
 ## Programming paths
 # Go environment
-[[ -d ${HOME}/workspace/gocode ]] && export GOPATH=${HOME}/workspace/gocode
+[[ -z ${GOPATH} ]] && export GOPATH=${HOME}/go
+
 
 # Python virtual environments
-[[ -d ${HOME}/.virtualenvs ]] && export WORKON_HOME=${HOME}/.virtualenvs
+[[ -d ${HOME}/.venvs ]] && export WORKON_HOME=${HOME}/.venvs
 [[ -d ${HOME}/workspace ]] && export PROJECT_HOME=${HOME}/workspace
-#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 # Link Brew Cask applications to normal location
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -36,12 +36,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # Load Ruby's rbenv
 if which rbenv &> /dev/null; then  eval "$(rbenv init -)"; fi
 
-# Load pyenv autocompletion
-#if which pyenv &> /dev/null; then  eval "$(pyenv init -)"; fi
-#if which pyenv-virtualenv-init &> /dev/null; then  eval "$(pyenv virtualenv-init -)"; fi
-
 # Load Pipenv autocompletion
-if which pyenv &> /dev/null; then  eval "$(pipenv --completion)"; fi
+if which pipenv &> /dev/null; then  eval "$(pipenv --completion)"; fi
 
 # Load nodenv
 if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
@@ -80,7 +76,7 @@ if [[ ${SHELL} == *"bash" ]]; then
   [[ -f /usr/local/etc/bash_completion.d/kubectl ]] && source /usr/local/etc/bash_completion.d/kubectl &>/dev/null
 
   # direnv execution
-  #if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
+  if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
 
   # SSH hostnames
   [[ -f /usr/local/etc/bash_completion.d/ssh_hosts ]] && source /usr/local/etc/bash_completion.d/ssh_hosts &>/dev/null
@@ -93,7 +89,7 @@ else
   [[ -f ${HOME}/bin/kubectl ]] && source <(kubectl completion zsh)
 
   # direnv execution
-  #if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
+  if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
 
   # SSH hostnames
   [[ -f /usr/local/share/zsh-completions/_ssh ]] && source /usr/local/share/zsh-completions/_ssh
