@@ -20,8 +20,6 @@ pathmunge () {
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
 # Homebrew coreutils
 [[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin
-# GoLang
-[[ -d ${GOROOT}/bin ]] && pathmunge ${GOROOT}/bin
 # Add rbenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.rbenv/bin ]] && pathmunge ${HOME}/.rbenv/bin
 
