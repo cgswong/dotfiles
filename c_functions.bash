@@ -64,8 +64,7 @@ function fs() {
 }
 
 # Use Git’s colored diff when available
-hash git &>/dev/null;
-if [ $? -eq 0 ]; then
+if which git &>/dev/null; then
 	function diff() {
 		git diff --no-index --color-words "$@";
 	}
@@ -100,12 +99,14 @@ function server() {
 
 # Start a PHP server from a directory, optionally specifying the port
 # (Requires PHP 5.4.0+.)
-function phpserver() {
-	local port="${1:-4000}";
-	local ip=$(ipconfig getifaddr en1);
-	sleep 1 && open "http://${ip}:${port}/" &
-	php -S "${ip}:${port}";
-}
+if which php &>/dev/null; then
+	function phpserver() {
+		local port="${1:-4000}";
+		local ip=$(ipconfig getifaddr en1);
+		sleep 1 && open "http://${ip}:${port}/" &
+		php -S "${ip}:${port}";
+	}
+fi
 
 # Compare original and gzipped file size
 function gz() {
@@ -141,22 +142,26 @@ function escape() {
 }
 
 # Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
-	perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
-	# print a newline unless we’re piping the output to another program
-	if [ -t 1 ]; then
-		echo ""; # newline
-	fi;
-}
+if which perl &>/dev/null; then
+	function unidecode() {
+		perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
+		# print a newline unless we’re piping the output to another program
+		if [ -t 1 ]; then
+			echo ""; # newline
+		fi;
+	}
+fi
 
 # Get a character’s Unicode code point
-function codepoint() {
-	perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
-	# print a newline unless we’re piping the output to another program
-	if [ -t 1 ]; then
-		echo ""; # newline
-	fi;
-}
+if which perl &>/dev/null; then
+	function codepoint() {
+		perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
+		# print a newline unless we’re piping the output to another program
+		if [ -t 1 ]; then
+			echo ""; # newline
+		fi;
+	}
+fi
 
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
