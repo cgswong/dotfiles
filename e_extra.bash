@@ -15,34 +15,34 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 ## AWS
 # Set environment for AWS access
 export AWS_DEFAULT_REGION="us-east-1"
-export AWS_CREDENTIAL_FILE=~/.aws/credentials
+export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 # Kubernetes
-[[ -z "$KUBECONFIG" ]] && KUBECONFIG=${HOME}/.kube/config
+[[ -z "$KUBECONFIG" ]] && [[ -f "${HOME}/.kube/config" ]] && KUBECONFIG=${HOME}/.kube/config
 
 ## Programming paths
 # Go environment
-[[ -z ${GOPATH} ]] && export GOPATH=${HOME}/go
+[[ -z ${GOPATH} ]] && export GOPATH=${HOME}/environment/go
 
 
 # Python virtual environments
-[[ -d ${HOME}/.venvs ]] && export WORKON_HOME=${HOME}/.venvs
-[[ -d ${HOME}/workspace ]] && export PROJECT_HOME=${HOME}/workspace
+[[ -d ${HOME}/.venv ]] && export WORKON_HOME=${HOME}/.venv
+[[ -d ${HOME}/environment ]] && export PROJECT_HOME=${HOME}/environment
 
 # Link Brew Cask applications to normal location
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+if which brew &>/dev/null; then   export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
 
 ## TAB completion
 # Load Ruby's rbenv
-if which rbenv &> /dev/null; then  eval "$(rbenv init -)"; fi
+if which rbenv &>/dev/null; then  eval "$(rbenv init -)"; fi
 
 # Load Pipenv autocompletion
-if which pipenv &> /dev/null; then  eval "$(pipenv --completion)"; fi
+if which pipenv &>/dev/null; then  eval "$(pipenv --completion)"; fi
 
 # Load nodenv
 if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
 
-if [[ ${SHELL} == *"bash" ]]; then
+if [[ "${SHELL}" == *"bash" ]]; then
   # Enable some Bash 4 features when possible:
   # autocd: e.g. `**/qux` will enter `./foo/bar/baz/qux`
   # cdspell: Autocorrect typos in path names when using `cd`
@@ -50,18 +50,18 @@ if [[ ${SHELL} == *"bash" ]]; then
   # histappend: Append to the Bash history file, rather than overwriting it
   # nocaseglob: Case-insensitive globbing (used in pathname expansion)
   for option in autocd cdspell globstar histappend nocaseglob; do
-    shopt -s "$option" 2> /dev/null
+    shopt -s "$option" 2>/dev/null
   done;
 
   # Brewed Bash command tab completion
-  if which brew &> /dev/null && [[ -f "/usr/local/etc/bash_completion" ]]; then
+  if which brew &>/dev/null && [[ -f "/usr/local/etc/bash_completion" ]]; then
     source "/usr/local/etc/bash_completion"
   elif [[ -f /etc/bash_completion ]]; then
     source /etc/bash_completion
   fi
 
   # Enable tab completion for `g` by marking it as an alias for `git`
-  if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  if type _git &>/dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     complete -o default -o nospace -F _git g
   fi
 
@@ -72,21 +72,21 @@ if [[ ${SHELL} == *"bash" ]]; then
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
 
-  # kubectl completion
-  [[ -f /usr/local/etc/bash_completion.d/kubectl ]] && source /usr/local/etc/bash_completion.d/kubectl &>/dev/null
+  # kubectl completion. Must have 4.4+ version of bash to work
+  #if which kubectl &>/dev/null; then  "source <(kubectl completion bash)"; fi
 
   # direnv execution
   if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
 
   # SSH hostnames
   [[ -f /usr/local/etc/bash_completion.d/ssh_hosts ]] && source /usr/local/etc/bash_completion.d/ssh_hosts &>/dev/null
-else
-## Assume zsh
+elif [[ "${SHELL}" == *"zsh" ]]; then
+  ## zsh
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh &>/dev/null
 
   # kubectl completion
-  [[ -f ${HOME}/bin/kubectl ]] && source <(kubectl completion zsh)
+  #if which kubectl &>/dev/null; then  "source <(kubectl completion zsh)"; fi
 
   # direnv execution
   if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
@@ -106,7 +106,7 @@ fi
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
 
 # GNU manpages for programs that are from GNU coreutils
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+[[ -d /usr/local/opt/coreutils/libexec/gnuman ]] && export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 ## Serverless
 # tabtab source for serverless package
