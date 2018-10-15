@@ -1,4 +1,6 @@
 # Set environment for processes
+SHELL_NAME=${SHELL##*/}
+
 # Enable color in command line and 'less'
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -96,11 +98,11 @@ elif [[ "${SHELL}" == *"zsh" ]]; then
 fi
 
 # Google Cloud shell command completion
-[[ -f ${HOME}/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc ]] && source ${HOME}/gcloud/google-cloud-sdk/path.$(basename ${SHELL}).inc &>/dev/null
-[[ -f ${HOME}/gcloud/google-cloud-sdk/completion.$(basename ${SHELL}).inc ]] && source ${HOME}/gcloud/google-cloud-sdk/completion.$(basename ${SHELL}).inc &>/dev/null
+[[ -f ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc &>/dev/null
+[[ -f ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc &>/dev/null
 
 # iTerm2 shell integration
-[[ -f ~/.iterm2_shell_integration.$(basename ${SHELL}) ]] && source ~/.iterm2_shell_integration.$(basename ${SHELL}) &>/dev/null
+[[ -f ~/.iterm2_shell_integration.${SHELL_NAME} ]] && source ~/.iterm2_shell_integration.${SHELL_NAME} &>/dev/null
 
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
@@ -111,7 +113,7 @@ fi
 ## Serverless
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.${SHELL_NAME} ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.${SHELL_NAME}
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.${SHELL_NAME} ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.${SHELL_NAME}

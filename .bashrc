@@ -1,24 +1,30 @@
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/dotfiles/*.bash; do
-  [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
+for fname in ${HOME}/dotfiles/*.bash; do
+  [[ -r "$fname" ]] && [[ -f "$fname" ]] && source "$fname"
 done
-unset file
+unset fname
 
 # Bash-it
-export BASH_IT="/Users/cgwong/.bash_it"
-export BASH_IT_CUSTOM=${HOME}/dotfiles
-export BASH_IT_THEME="bobby"
-export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+if [[ -d "${HOME}/.bash_it" ]]; then
+  export BASH_IT=${HOME}/.bash_it
+  export BASH_IT_CUSTOM=${HOME}/dotfiles
+  export BASH_IT_THEME="bobby"
+  export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+fi
 unset MAILCHECK
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cgwong/google-cloud-sdk/path.bash.inc' ]; then source '/Users/cgwong/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/cgwong/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/cgwong/google-cloud-sdk/completion.bash.inc'; fi
-
 # Load Bash It
-#source "$BASH_IT"/bash_it.sh
+[[ -f "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
 
-# direnv execution
-if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
+# Load nvm bash_completion
+[[ -d "${HOME}/.nvm" ]] && export NVM_DIR="${HOME}/.nvm"
+[ "$BASH_VERSION" ] && npm() {
+  # hack: avoid slow npm sanity check in nvm
+  if [ "$*" == "config get prefix" ]; then which node | sed "s/bin\/node//";
+  else $(which npm) "$@"; fi
+}
+# prevent rvm complaints that nvm is first in PATH
+rvm_silence_path_mismatch_check_flag=1
+unset npm
+# end hack
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
