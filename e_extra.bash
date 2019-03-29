@@ -29,7 +29,7 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 # Python virtual environments
 [[ -d ${HOME}/.venv ]] && export WORKON_HOME=${HOME}/.venv
-[[ -d ${HOME}/environment ]] && export PROJECT_HOME=${HOME}/environment
+[[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
 
 # Link Brew Cask applications to normal location
 if which brew &>/dev/null; then   export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
