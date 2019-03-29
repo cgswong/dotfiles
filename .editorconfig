@@ -1,5 +1,8 @@
 # [EditorConfig](http://EditorConfig.org), which is awesomeness, standardizes coding syles
 
+# top-most EditorConfig file, cascade to all sub-directories
+root = true
+
 # Unix-style newlines with a newline ending every file
 [*]
 end_of_line = lf
