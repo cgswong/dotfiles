@@ -26,6 +26,9 @@ pathmunge () {
 # Add rbenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.rbenv/bin ]] && pathmunge ${HOME}/.rbenv/bin
 
+# Add pyenv to PATH so that it loads every time you open a terminal
+[[ -d ${HOME}/.pyenv/shims ]] && pathmunge $(pyenv root)/shims
+
 export PATH
 
 unset -f pathmunge
