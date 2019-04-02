@@ -25,9 +25,10 @@ pathmunge () {
 [[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin
 # Add rbenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.rbenv/bin ]] && pathmunge ${HOME}/.rbenv/bin
-
 # Add pyenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.pyenv/shims ]] && pathmunge $(pyenv root)/shims
+# Add krew to PATH
+[[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin
 
 export PATH
 
