@@ -1,5 +1,5 @@
 # Set environment for processes
-SHELL_NAME=${SHELL##*/}
+export SHELL_NAME=${SHELL##*/}
 
 # Enable color in command line and 'less'
 export CLICOLOR=1
@@ -16,15 +16,15 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 ## AWS
 # Set environment for AWS access
-export AWS_DEFAULT_REGION="us-east-1"
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-"us-east-2"}
 export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 # Kubernetes
-[[ -z "$KUBECONFIG" ]] && [[ -f "${HOME}/.kube/config" ]] && KUBECONFIG=${HOME}/.kube/config
+[[ -f "${HOME}/.kube/config" ]] && export KUBECONFIG=${KUBECONFIG:=$HOME/.kube/config}
 
 ## Programming paths
 # Go environment
-[[ -z ${GOPATH} ]] && export GOPATH=${HOME}/environment/go
+[[ -d ${HOME}/go ]] && export GOPATH=${GOPATH:=$HOME/go}
 
 
 # Python virtual environments
@@ -32,7 +32,7 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 [[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
 
 # Link Brew Cask applications to normal location
-if which brew &>/dev/null; then   export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
+if which brew &>/dev/null; then  export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
 
 ## TAB completion
 # Load Ruby's rbenv
@@ -44,7 +44,9 @@ if which pipenv &>/dev/null; then  eval "$(pipenv --completion)"; fi
 # Load nodenv
 if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
 
-if [[ "${SHELL}" == *"bash" ]]; then
+if [[ "${SHELL_NAME}" == "bash" ]]; then
+  export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+
   # Enable some Bash 4 features when possible:
   # autocd: e.g. `**/qux` will enter `./foo/bar/baz/qux`
   # cdspell: Autocorrect typos in path names when using `cd`
@@ -56,16 +58,14 @@ if [[ "${SHELL}" == *"bash" ]]; then
   done;
 
   # Brewed Bash command tab completion
-  if which brew &>/dev/null && [[ -f "/usr/local/etc/bash_completion" ]]; then
-    source "/usr/local/etc/bash_completion"
-  elif [[ -f /etc/bash_completion ]]; then
-    source /etc/bash_completion
+  if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
+    . "/usr/local/etc/profile.d/bash_completion.sh"
+  elif [[ -r /etc/bash_completion ]]; then
+    . /etc/bash_completion
   fi
 
-  # Enable tab completion for `g` by marking it as an alias for `git`
-  if type _git &>/dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-    complete -o default -o nospace -F _git g
-  fi
+  # Enable git tab completion
+  [[ -f ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash ]] && . ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash
 
   # Add tab completion for `defaults read|write NSGlobalDomain`
   # You could just use `-g` instead, but I like being explicit
@@ -74,35 +74,23 @@ if [[ "${SHELL}" == *"bash" ]]; then
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
 
-  # kubectl completion. Must have 4.4+ version of bash to work
-  #if which kubectl &>/dev/null; then  "source <(kubectl completion bash)"; fi
-
-  # direnv execution
-  if which direnv &> /dev/null; then  eval "$(direnv hook bash)"; fi
-
   # SSH hostnames
-  [[ -f /usr/local/etc/bash_completion.d/ssh_hosts ]] && source /usr/local/etc/bash_completion.d/ssh_hosts &>/dev/null
-elif [[ "${SHELL}" == *"zsh" ]]; then
+  [[ -f ${BASH_COMPLETION_COMPAT_DIR}/ssh ]] && . ${BASH_COMPLETION_COMPAT_DIR}/ssh &>/dev/null
+elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
-  [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh &>/dev/null
-
-  # kubectl completion
-  #if which kubectl &>/dev/null; then  "source <(kubectl completion zsh)"; fi
-
-  # direnv execution
-  if which direnv &> /dev/null; then  eval "$(direnv hook zsh)"; fi
+  [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && . /usr/local/bin/aws_zsh_completer.sh &>/dev/null
 
   # SSH hostnames
-  [[ -f /usr/local/share/zsh-completions/_ssh ]] && source /usr/local/share/zsh-completions/_ssh
+  [[ -f /usr/local/share/zsh-completions/_ssh ]] && . /usr/local/share/zsh-completions/_ssh
 fi
 
-# Google Cloud shell command completion
-[[ -f ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc &>/dev/null
-[[ -f ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc &>/dev/null
+# direnv execution
+if which direnv &> /dev/null; then  eval "$(direnv hook ${SHELL_NAME})"; fi
 
-# iTerm2 shell integration
-[[ -f ~/.iterm2_shell_integration.${SHELL_NAME} ]] && source ~/.iterm2_shell_integration.${SHELL_NAME} &>/dev/null
+# Google Cloud shell command completion
+[[ -f ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc ]] && . ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc &>/dev/null
+[[ -f ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc ]] && . ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc &>/dev/null
 
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
