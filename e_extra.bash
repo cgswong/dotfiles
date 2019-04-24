@@ -16,15 +16,15 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 ## AWS
 # Set environment for AWS access
-export AWS_DEFAULT_REGION="us-east-1"
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-"us-east-2"}
 export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 # Kubernetes
-[[ -z "$KUBECONFIG" ]] && [[ -f "${HOME}/.kube/config" ]] && KUBECONFIG=${HOME}/.kube/config
+[[ -f "${HOME}/.kube/config" ]] && export KUBECONFIG=${KUBECONFIG:=$HOME/.kube/config}
 
 ## Programming paths
 # Go environment
-[[ -z ${GOPATH} ]] && export GOPATH=${HOME}/environment/go
+[[ -d ${HOME}/go ]] && export GOPATH=${GOPATH:=$HOME/go}
 
 
 # Python virtual environments
@@ -32,7 +32,7 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 [[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
 
 # Link Brew Cask applications to normal location
-if which brew &>/dev/null; then   export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
+if which brew &>/dev/null; then  export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
 
 ## TAB completion
 # Load Ruby's rbenv
@@ -100,9 +100,6 @@ fi
 # Google Cloud shell command completion
 [[ -f ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc &>/dev/null
 [[ -f ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc ]] && source ${HOME}/gcloud/google-cloud-sdk/completion.${SHELL_NAME}.inc &>/dev/null
-
-# iTerm2 shell integration
-[[ -f ~/.iterm2_shell_integration.${SHELL_NAME} ]] && source ~/.iterm2_shell_integration.${SHELL_NAME} &>/dev/null
 
 # Travis
 [[ -f ${HOME}/.travis/travis.sh ]] && source ${HOME}/.travis/travis.sh
