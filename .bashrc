@@ -20,8 +20,11 @@ unset MAILCHECK
 [[ -d "${HOME}/.nvm" ]] && export NVM_DIR="${HOME}/.nvm"
 [ "$BASH_VERSION" ] && npm() {
   # hack: avoid slow npm sanity check in nvm
-  if [ "$*" == "config get prefix" ]; then which node | sed "s/bin\/node//";
-  else $(which npm) "$@"; fi
+  if [[ "$*" == "config get prefix" ]]; then 
+    which node | sed "s/bin\/node//"
+  else
+    $(which npm) "$@"
+  fi
 }
 # prevent rvm complaints that nvm is first in PATH
 rvm_silence_path_mismatch_check_flag=1
