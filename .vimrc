@@ -1,13 +1,19 @@
-set nocompatible     " Make Vim more useful
+" Vundle required
+set nocompatible
+filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim     " set the runtime path to include Vundle and initialize
+" Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
 " Keep Plugin commands between vundle#begin/end.
-call vundle#begin()                   " Required
-"call vundle#begin('~/.vim/vundle')    " alternatively, pass a path where Vundle should install plugins
+call vundle#begin()
+" Alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/.vim/vundle')
 
-" Core
-Plugin 'VundleVim/Vundle.vim'   " let Vundle manage Vundle, required
+" Let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'L9'
+Plugin 'flazz/vim-colorschemes'
 
 " File management
 Plugin 'abolish.vim'
@@ -41,11 +47,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ekalinin/Dockerfile.vim'
 
 " All Vundle plugins must be added before the following line
-call vundle#end()            " Required
+call vundle#end()
 
-filetype on          " Enable filetype detection
-filetype indent on   " Enable filetype-specific identing
-filetype plugin on   " Enable filetype-specific plugins
+" Enable filetype-specific plugins and indenting
+filetype indent plugin on
 
 " Enable indent guides
 "let g:indent_guides_enable_on_vim_startup = 1
@@ -65,19 +70,18 @@ let g:table_mode_corner="|"
 " Put non-Plugin stuff after this line
 
 " Use theme
-colorscheme distinguished
+"colorscheme visualstudio
 
 " Change mapleader
 let mapleader=","
 
 " Don’t add empty newlines at the end of files
-autocmd  FileType binary setlocal noeol
-" set binary
-" set noeol
+autocmd FileType binary setlocal noeol
 
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
-set backupskip=/tmp/*,/private/tmp/*    " No backups when editing files in certain directories
+" No backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim/swaps
 if exists("&undodir")
   set undodir=~/.vim/undo
@@ -87,7 +91,7 @@ endif
 set exrc
 set secure
 
-syntax on      " Enable syntax highlighting
+syntax on             " Enable syntax highlighting
 set shortmess=atI     " Don’t show the intro message when starting Vim
 set cursorline        " Highlight current line
 set laststatus=2      " Always show status line
@@ -96,6 +100,7 @@ set ruler             " Show the cursor position
 set showmode          " Show the current mode
 set title             " Show the filename in the window titlebar
 set number            " Display line numbers
+
 " Relative numbering
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -111,11 +116,11 @@ nnoremap <leader>r :call NumberToggle()<cr>
 
 set scrolloff=3      " Start scrolling 3 lines before the horizontal window border
 
-set ttyfast                    " Optimize for fast terminal connections
-set encoding=utf-8 nobomb      " Use UTF-8 without BOM
-set noerrorbells               " Disable error bells
-" set mouse=a      " Enable mouse in all modes
-set mouse=r      " Enable mouse in read mode
+set ttyfast                   " Optimize for fast terminal connections
+set encoding=utf-8 nobomb     " Use UTF-8 without BOM
+set noerrorbells              " Disable error bells
+"set mouse=a                   " Enable mouse in all modes
+set mouse=r                   " Enable mouse in read mode
 
 set expandtab      " Use spaces instead of tabs
 set tabstop=2      " 2 spaces for tabs
@@ -154,15 +159,11 @@ function! StripWhitespace()
   call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-" noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 " Automatic commands
 if has("autocmd")
   " Enable file type detection
   filetype on
-  " Treat .json files as .js
-  autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
   " Treat .md files as Markdown
   autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
@@ -178,8 +179,5 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
-set list                " Show problematic characters.
-
-" Highlight all tabs and trailing whitespace characters.
-"highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-"match ExtraWhitespace /\s\+$\|\t/
+" Show problematic characters.
+set list
