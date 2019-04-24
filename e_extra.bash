@@ -56,10 +56,10 @@ if [[ "${SHELL}" == *"bash" ]]; then
   done;
 
   # Brewed Bash command tab completion
-  if which brew &>/dev/null && [[ -f "/usr/local/etc/bash_completion" ]]; then
-    source "/usr/local/etc/bash_completion"
-  elif [[ -f /etc/bash_completion ]]; then
-    source /etc/bash_completion
+  if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
+    . "/usr/local/etc/profile.d/bash_completion.sh"
+  elif [[ -r /etc/bash_completion ]]; then
+    . /etc/bash_completion
   fi
 
   # Enable tab completion for `g` by marking it as an alias for `git`
