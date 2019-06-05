@@ -76,6 +76,9 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
 
   # SSH hostnames
   [[ -f ${BASH_COMPLETION_COMPAT_DIR}/ssh ]] && . ${BASH_COMPLETION_COMPAT_DIR}/ssh &>/dev/null
+
+  # Add Okta AWS CLI plugin
+  [[ -f ${HOME}/.okta/bash_functions ]] && source ${HOME}/.okta/bash_functions
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
