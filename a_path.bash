@@ -21,6 +21,7 @@ pathmunge () {
 [[ -d ${HOME}/toolbelt ]] && pathmunge ${HOME}/toolbelt
 [[ -d ${HOME}/.local/bin ]] && pathmunge ${HOME}/.local/bin
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
+[[ -d ${HOME}/.ebcli-virtual-env/executables ]] && pathmunge ${HOME}/.ebcli-virtual-env/executables
 # Homebrew coreutils
 [[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin
 # Add rbenv to PATH so that it loads every time you open a terminal
@@ -29,7 +30,8 @@ pathmunge () {
 [[ -d ${HOME}/.pyenv/shims ]] && pathmunge $(pyenv root)/shims
 # Add krew to PATH
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin
-
+# Add Okta AWS CLI plugin
+[[ -d ${HOME}/.okta/bin ]] && pathmunge ${HOME}/.okta/bin
 export PATH
 
 unset -f pathmunge
