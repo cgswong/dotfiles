@@ -18,9 +18,11 @@ unset MAILCHECK
 
 # Load nvm bash_completion
 [[ -d "${HOME}/.nvm" ]] && export NVM_DIR="${HOME}/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
 [ "$BASH_VERSION" ] && npm() {
   # hack: avoid slow npm sanity check in nvm
-  if [[ "$*" == "config get prefix" ]]; then 
+  if [[ "$*" == "config get prefix" ]]; then
     which node | sed "s/bin\/node//"
   else
     $(which npm) "$@"
