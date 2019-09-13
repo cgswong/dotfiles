@@ -16,7 +16,7 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 
 ## AWS
 # Set environment for AWS access
-export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-"us-east-2"}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-"us-east-1"}
 export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 # Kubernetes
