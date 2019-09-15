@@ -1,6 +1,6 @@
 # Load the shell dotfiles, and then some:
 for fname in ${HOME}/dotfiles/*.bash; do
-  [[ -r "$fname" ]] && [[ -f "$fname" ]] && source "$fname"
+  [[ -s "$fname" ]] && source "$fname"
 done
 unset fname
 
@@ -14,7 +14,7 @@ fi
 unset MAILCHECK
 
 # Load Bash It
-[[ -f "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
+[[ -s "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
 
 # Load nvm bash_completion
 [[ -d "${HOME}/.nvm" ]] && export NVM_DIR="${HOME}/.nvm"
