@@ -15,8 +15,6 @@ pathmunge () {
 [[ -d "/usr/local/opt/openssl@1.1/bin" ]] && pathmunge "/usr/local/opt/openssl@1.1/bin"
 [[ -d /usr/local/sbin ]] && pathmunge /usr/local/sbin
 # Add personal bin to $PATH
-[[ -d ${HOME}/devel/scripts ]] && pathmunge ${HOME}/devel/scripts
-[[ -d ${HOME}/devel/toolbelt ]] && pathmunge ${HOME}/devel/toolbelt
 [[ -d ${HOME}/scripts ]] && pathmunge ${HOME}/scripts
 [[ -d ${HOME}/toolbelt ]] && pathmunge ${HOME}/toolbelt
 [[ -d ${HOME}/.local/bin ]] && pathmunge ${HOME}/.local/bin
