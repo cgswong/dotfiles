@@ -9,7 +9,7 @@ if [[ -d "${HOME}/.bash_it" ]]; then
   [[ -s "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
 else
   # Load the shell dotfiles
-  for fname in "${HOME}/.{path,aliases,functions,extra}"; do
+  for fname in ${HOME}/.{path,aliases,functions,extra}; do
     [[ -s "$fname" ]] && source "$fname"
   done
   unset fname
