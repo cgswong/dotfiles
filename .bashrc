@@ -1,20 +1,20 @@
-# Load the shell dotfiles, and then some:
-for fname in ${HOME}/dotfiles/*.bash; do
-  [[ -s "$fname" ]] && source "$fname"
-done
-unset fname
-
 # Bash-it
 if [[ -d "${HOME}/.bash_it" ]]; then
   export BASH_IT=${HOME}/.bash_it
   export BASH_IT_CUSTOM=${HOME}/dotfiles
   export BASH_IT_THEME="bobby"
   export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+  # Load Bash It
+  [[ -s "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
+else
+  # Load the shell dotfiles
+  for fname in "${HOME}/.{path,aliases,functions,extra}"; do
+    [[ -s "$fname" ]] && source "$fname"
+  done
+  unset fname
 fi
 unset MAILCHECK
-
-# Load Bash It
-[[ -s "${BASH_IT}/bash_it.sh" ]] && source "${BASH_IT}/bash_it.sh"
 
 # Load nvm bash_completion
 [[ -d "${HOME}/.nvm" ]] && export NVM_DIR="${HOME}/.nvm"
