@@ -73,6 +73,7 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
 
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
+  [[ -f ${HOME}/.local/bin/aws_completer ]] && complete -C "${HOME}/.local/bin/aws_completer" aws
 
   # SSH hostnames
   [[ -f ${BASH_COMPLETION_COMPAT_DIR}/ssh ]] && . ${BASH_COMPLETION_COMPAT_DIR}/ssh &>/dev/null
@@ -111,3 +112,4 @@ if which direnv &> /dev/null; then  eval "$(direnv hook ${SHELL_NAME})"; fi
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME} ] && . /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME}
+
