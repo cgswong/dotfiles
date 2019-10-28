@@ -1,0 +1,68 @@
+# Instead of Control-a, make the escape/command character be ``
+# escape ``
+# Instead of Control-a, make the escape/command character be CTRL-s
+# escape ^Ss
+# Instead of Control-a, make the escape/command character be CTRL-`
+escape ^``
+
+# 256 colors
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+# Allow to switch region focus by clicking
+defmousetrack on
+
+# Navigating regions with Ctrl-arrows
+bindkey "^[[1;5D" focus left
+bindkey "^[[1;5C" focus right
+bindkey "^[[1;5A" focus up
+bindkey "^[[1;5B" focus down
+
+# No welcome message
+startup_message off
+
+# Emulate .logout message
+pow_detach_msg "Screen session of $LOGNAME $:cr:$:nl:ended."
+
+# Make the shell in every window a login shell
+shell -$SHELL
+
+# Set every new windows hardstatus line to something descriptive
+defhstatus "screen: ^En (^Et)"
+
+# Huge scrollback buffer
+defscrollback 10000
+
+# Make the output buffer large for (fast) xterms.
+termcapinfo xterm* OL=10000
+
+# Tell screen that xterm can switch to dark background and has function
+# keys.
+termcapinfo xterm|xterm-* 'VR=\E[?5h:VN=\E[?5l'
+
+# special xterm hardstatus: use the window title.
+termcapinfo xterm|xterm-* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+# Emulate part of the 'K' charset
+termcapinfo   xterm|xterm-* 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+
+# xterm-52 tweaks:
+# - uses background color for delete operations
+termcapinfo xterm* be
+
+# Alternative caption, gives window list, LOGNAME and current date:
+caption always "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=%{mk}@%H %{yk}%D %{ck}%M%{wk} %{ck}%d %{gk}%c"
+# The following two lines give a two-line status, with the current window highlighted
+hardstatus on
+hardstatus alwayslastline "%{BW}%16=%l %{BW}%50=%d/%m/%Y %{BW}%80=%c%="
+
+# Resize the current region. The space will be removed from or added to
+# the region below or if there's not enough space from the region above.
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+
+# Set default log format
+logfile /tmp/screen-%Y-%m-%d-%S_%n.log
