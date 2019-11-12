@@ -30,9 +30,9 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 # Python virtual environments
 [[ -d ${HOME}/.venv ]] && export WORKON_HOME=${HOME}/.venv
 [[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
-python_version=$(python -V | awk '{print $2}')
-python_major_version=$(echo "${python_version}" | cut -d'.' -f1,2)
-[[ -d ${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages ]] && export PYTHONPATH=${PYTHONPATH}:${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages
+#python_version=$(python -V | awk '{print $2}')
+#python_major_version=$(echo "${python_version}" | cut -d'.' -f1,2)
+#[[ -d ${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages ]] && export PYTHONPATH=${PYTHONPATH}:${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages
 
 # Link Brew Cask applications to normal location
 if which brew &>/dev/null; then  export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
