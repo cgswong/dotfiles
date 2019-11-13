@@ -66,10 +66,10 @@ packer_cache
 *.box
 
 # Terraform
-**/.terraform/*
-*.tfstate
-*.tfstate.*
-*.tfplan
+.terraform/
+.tfstate
+.tfstate*
+.tfplan
 
 # Serverless
 .serverless
