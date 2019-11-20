@@ -16,7 +16,7 @@ pathmunge () {
 [[ -d /usr/local/sbin ]] && pathmunge /usr/local/sbin
 # Add personal bin to $PATH
 [[ -d ${HOME}/scripts ]] && pathmunge ${HOME}/scripts
-[[ -d ${HOME}/toolbelt ]] && pathmunge ${HOME}/toolbelt
+[[ -d ${HOME}/.toolbox/bin ]] && pathmunge ${HOME}/.toolbox/bin
 [[ -d ${HOME}/.local/bin ]] && pathmunge ${HOME}/.local/bin
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
 [[ -d ${HOME}/.ebcli-virtual-env/executables ]] && pathmunge ${HOME}/.ebcli-virtual-env/executables
