@@ -9,6 +9,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="agnoster"
+# ZSH_THEME="bullet-train"
 ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to pick from when loading at random
@@ -100,7 +101,11 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] && [[ ZSH_THEME == "powerlevel10k/powerlevel10k" ]] || source ~/.p10k.zsh
+# To customize prompt, edit ~/.bullet-train.zsh.
+[[ ! -f ~/.bullet-train.zsh ]] && [[ ZSH_THEME == "bullet-train" ]] || source ~/.bullet-train.zsh
+# To customize prompt, edit ~/.bullet-train.zsh.
+[[ ! -f ~/.agnoster.zsh ]] && [[ ZSH_THEME == "agnoster" ]] || source ~/.agnoster.zsh
 
 # Add auto-suggestion
 [[ ! -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

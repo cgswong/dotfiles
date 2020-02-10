@@ -1,0 +1,33 @@
+# Bullet-train zsh theme configuration
+BULLETTRAIN_STATUS_EXIT_SHOW=true
+# Python virtualenv
+BULLETTRAIN_VIRTUALENV_FG=black
+BULLETTRAIN_VIRTUALENV_BG=yellow
+# node.js nvm
+BULLETTRAIN_NVM_BG=green
+BULLETTRAIN_NVM_FG=black
+# Dir
+BULLETTRAIN_DIR_CONTEXT_SHOW=false
+# User context
+BULLETTRAIN_CONTEXT_SHOW=false
+BULLETTRAIN_CONTEXT_DEFAULT_USER=none
+BULLETTRAIN_CONTEXT_HOSTNAME=
+# Kubernetes
+BULLETTRAIN_KCTX_BG=blue
+BULLETTRAIN_KCTX_FG=black
+BULLETTRAIN_KCTX_NAMESPACE=false
+# Git
+BULLETTRAIN_GIT_EXTENDED=false
+# Prompt order/contents
+BULLETTRAIN_PROMPT_SEPARATE_LINE=false
+BULLETTRAIN_PROMPT_ORDER=(
+  time
+  status
+  dir
+  virtualenv
+  nvm
+  aws
+  kctx
+  git
+  cmd_exec_time
+)
