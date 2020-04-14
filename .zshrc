@@ -70,7 +70,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ansible aws copydir copyfile dircycle docker docker-compose docker-machine git git-extras git-flow git-prompt gitignore golang helm history httpie iterm2 jsontools kubectl npm osx pipenv pyenv python screen terraform themes tmux vagrant vagrant-prompt virtualenv vscode z)
+plugins=(copydir copyfile dircycle docker docker-compose docker-machine git git-flow git-prompt gitignore helm history httpie jsontools kubectl npm osx pipenv pyenv terraform themes tmux virtualenv z zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,9 +107,11 @@ fi
 # To customize prompt, edit ~/.bullet-train.zsh.
 [[ ! -f ~/.agnoster.zsh ]] && [[ ZSH_THEME == "agnoster" ]] || source ~/.agnoster.zsh
 
-# Add auto-suggestion
-[[ ! -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# tabtab source for yo package
+# uninstall by removing these lines or running `tabtab uninstall yo`
+[[ -f /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
 
-# Add shell syntax highlighting
-[[ ! -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# AWS CLI completion
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
 
