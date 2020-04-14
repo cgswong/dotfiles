@@ -2,8 +2,8 @@
 export SHELL_NAME=${SHELL##*/}
 
 # Enable color in command line and 'less'
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+# export CLICOLOR=1
+# export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Set default text editor
 export EDITOR=vim
@@ -63,7 +63,7 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   # Brewed Bash command tab completion
   if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
     . "/usr/local/etc/profile.d/bash_completion.sh"
-  elif [[ -r /etc/bash_completion ]]; then
+    elif [[ -r /etc/bash_completion ]]; then
     . /etc/bash_completion
   fi
 
@@ -83,7 +83,7 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
 
   # Add Okta AWS CLI plugin
   [[ -f ${HOME}/.okta/bash_functions ]] && source ${HOME}/.okta/bash_functions
-elif [[ "${SHELL_NAME}" == "zsh" ]]; then
+  elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && . /usr/local/bin/aws_zsh_completer.sh &>/dev/null
