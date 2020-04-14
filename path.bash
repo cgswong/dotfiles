@@ -1,7 +1,7 @@
 pathmunge () {
   case ":${PATH}:" in
     *:"$1":*)
-      ;;
+    ;;
     *)
       if [ "$2" = "after" ] ; then
         PATH=$PATH:$1
@@ -21,7 +21,7 @@ pathmunge () {
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
 [[ -d ${HOME}/.ebcli-virtual-env/executables ]] && pathmunge ${HOME}/.ebcli-virtual-env/executables
 # Homebrew coreutils
-[[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin
+[[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin after
 # Add rbenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.rbenv/bin ]] && pathmunge ${HOME}/.rbenv/bin
 # Add pyenv to PATH so that it loads every time you open a terminal

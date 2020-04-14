@@ -2,8 +2,9 @@
 export SHELL_NAME=${SHELL##*/}
 
 # Enable color in command line and 'less'
-# export CLICOLOR=1
 # export LSCOLORS=GxFxCxDxBxegedabagaced
+export CLICOLOR=1
+export CLICOLOR_FORCE=1
 
 # Set default text editor
 export EDITOR=vim
