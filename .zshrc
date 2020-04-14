@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -100,12 +107,21 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] && [[ ZSH_THEME == "powerlevel10k/powerlevel10k" ]] || source ~/.p10k.zsh
-# To customize prompt, edit ~/.bullet-train.zsh.
-[[ ! -f ~/.bullet-train.zsh ]] && [[ ZSH_THEME == "bullet-train" ]] || source ~/.bullet-train.zsh
-# To customize prompt, edit ~/.bullet-train.zsh.
-[[ ! -f ~/.agnoster.zsh ]] && [[ ZSH_THEME == "agnoster" ]] || source ~/.agnoster.zsh
+# Run appropriate theme configuration
+case $ZSH_THEME in
+  "powerlevel10k/powerlevel10k")
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  ;;
+  "bullet-train")
+    # To customize prompt, edit ~/.bullet-train.zsh.
+    [[ ! -f ~/.bullet-train.zsh ]] || source ~/.bullet-train.zsh
+  ;;
+  "agnoster")
+    # To customize prompt, edit ~/.bullet-train.zsh.
+    [[ ! -f ~/.agnoster.zsh ]] || source ~/.agnoster.zsh
+  ;;
+esac
 
 # tabtab source for yo package
 # uninstall by removing these lines or running `tabtab uninstall yo`
@@ -114,4 +130,3 @@ fi
 # AWS CLI completion
 autoload bashcompinit && bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
-
