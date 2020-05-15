@@ -125,7 +125,7 @@
 	untracked = cyan
 
 [credential]
-	helper = --show
+	# helper = --show
 	# helper = osxkeychain
 
 [diff]
