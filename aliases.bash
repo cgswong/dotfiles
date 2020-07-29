@@ -1,6 +1,6 @@
 # List all files colorized
 # List only directories
-alias lsd="ls -lFhp | grep --color=never '^d'"
+alias lsd="ls -lFhp | grep --color=auto '^d'"
 
 # Get week number
 alias week='date +%V'
