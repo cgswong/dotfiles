@@ -25,15 +25,12 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 ## Programming paths
 # Go environment
-[[ -d ${HOME}/go ]] && export GOPATH=${GOPATH:=$HOME/go}
-
+[[ ! -d ${HOME}/devel/go ]] && mkdir "$HOME/devel/go"
+[[ -d ${HOME}/devel/go ]] && export GOPATH=${GOPATH:=$HOME/devel/go}
 
 # Python virtual environments
 [[ -d ${HOME}/.venv ]] && export WORKON_HOME=${HOME}/.venv
 [[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
-#python_version=$(python -V | awk '{print $2}')
-#python_major_version=$(echo "${python_version}" | cut -d'.' -f1,2)
-#[[ -d ${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages ]] && export PYTHONPATH=${PYTHONPATH}:${HOME}/.pyenv/versions/${python_version}/lib/python${python_major_version}/site-packages
 
 # Link Brew Cask applications to normal location
 if which brew &>/dev/null; then  export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
@@ -44,9 +41,6 @@ if which rbenv &>/dev/null; then  eval "$(rbenv init -)"; fi
 
 # Load Pipenv autocompletion
 if which pipenv &>/dev/null; then  eval "$(pipenv --completion)"; fi
-
-# Load nodenv
-if which nodenv &>/dev/null; then  eval "$(nodenv init -)"; fi
 
 if [[ "${SHELL_NAME}" == "bash" ]]; then
   export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
@@ -64,27 +58,27 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   # Brewed Bash command tab completion
   if [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]]; then
     . "/usr/local/etc/profile.d/bash_completion.sh"
-    elif [[ -r /etc/bash_completion ]]; then
+  elif [[ -r /etc/bash_completion ]]; then
     . /etc/bash_completion
   fi
-
-  # Enable git tab completion
-  [[ -f ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash ]] && . ${BASH_COMPLETION_COMPAT_DIR}/git-completion.bash
 
   # Add tab completion for `defaults read|write NSGlobalDomain`
   # You could just use `-g` instead, but I like being explicit
   complete -W "NSGlobalDomain" defaults;
 
   # AWS shell command completion
-  [[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
-  [[ -f ${HOME}/.local/bin/aws_completer ]] && complete -C "${HOME}/.local/bin/aws_completer" aws
+  if [[ -f /usr/local/bin/aws_completer ]]; then
+    complete -C '/usr/local/bin/aws_completer' aws
+  elif [[ -f ${HOME}/.local/bin/aws_completer ]]; then
+    complete -C "${HOME}/.local/bin/aws_completer" aws
+  fi
 
   # SSH hostnames
   [[ -f ${BASH_COMPLETION_COMPAT_DIR}/ssh ]] && . ${BASH_COMPLETION_COMPAT_DIR}/ssh &>/dev/null
 
   # Add Okta AWS CLI plugin
   [[ -f ${HOME}/.okta/bash_functions ]] && source ${HOME}/.okta/bash_functions
-  elif [[ "${SHELL_NAME}" == "zsh" ]]; then
+elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && . /usr/local/bin/aws_zsh_completer.sh &>/dev/null
@@ -116,4 +110,3 @@ if which direnv &> /dev/null; then  eval "$(direnv hook ${SHELL_NAME})"; fi
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME} ] && . /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME}
-
