@@ -8,8 +8,8 @@ function calc() {
     # improve the output for decimal numbers
     printf "$result" |
     sed -e 's/^\./0./'        `# add "0" for cases like ".5"` \
-        -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
-        -e 's/0*$//;s/\.$//';  # remove trailing zeros
+    -e 's/^-\./-0./'      `# add "0" for cases like "-.5"`\
+    -e 's/0*$//;s/\.$//';  # remove trailing zeros
   else
     printf "$result";
   fi;
@@ -117,16 +117,6 @@ function gz() {
   printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-  if [ -t 0 ]; then # argument
-    python -mjson.tool <<< "$*" | pygmentize -l javascript;
-  else # pipe
-    python -mjson.tool | pygmentize -l javascript;
-  fi;
-}
-
 # Run `dig` and display the most useful info
 function digga() {
   dig +nocmd "$1" any +multiline +noall +answer;
@@ -163,8 +153,7 @@ if which perl &>/dev/null; then
   }
 fi
 
-# Show all the names (CNs and SANs) listed in the SSL certificate
-# for a given domain
+# Show all the names (CNs and SANs) listed in the SSL certificate for a given domain
 function getcertnames() {
   if [ -z "${1}" ]; then
     echo "ERROR: No domain specified.";
@@ -176,12 +165,12 @@ function getcertnames() {
   echo ""; # newline
 
   local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
-    | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+  | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
 
   if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
     local certText=$(echo "${tmp}" \
       | openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
-      no_serial, no_sigdump, no_signame, no_validity, no_version");
+    no_serial, no_sigdump, no_signame, no_validity, no_version");
     echo "Common Name:";
     echo ""; # newline
     echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//";
@@ -189,7 +178,7 @@ function getcertnames() {
     echo "Subject Alternative Name(s):";
     echo ""; # newline
     echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
-      | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
+    | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
     return 0;
   else
     echo "ERROR: Certificate not found.";
@@ -205,7 +194,7 @@ function tre() {
   tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-# AWS profile management. Sets ACCESS_KEY_ID or SECRET_ACCESS_KEY, but not for role switching.
+# Set AWS environemnt variables from ~/.aws/[config | credentials]
 if which awsenv &>/dev/null; then
   function setaws() {
     eval $(awsenv $1)
