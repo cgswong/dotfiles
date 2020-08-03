@@ -78,6 +78,13 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
 
   # Add Okta AWS CLI plugin
   [[ -f ${HOME}/.okta/bash_functions ]] && source ${HOME}/.okta/bash_functions
+
+  # Add OpenSSL flags for compiling to work
+  if [[ -d "/usr/local/opt/openssl@1.1" ]]; then
+    export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+    export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+    export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+  fi
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
