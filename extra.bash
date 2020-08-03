@@ -85,6 +85,11 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
     export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
     export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
   fi
+
+  # Enable pyenv if installed
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+  fi
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # AWS shell command completion
