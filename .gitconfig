@@ -125,6 +125,9 @@
 	untracked = cyan
 
 [credential]
+
+  helper = !aws codecommit credential-helper $@
+  UseHttpPath = true
 	# helper = --show
 	# helper = osxkeychain
 
@@ -135,6 +138,7 @@
 	tool = vimdiff
 
 [filter "media"]
+
   required = true
   clean = git media clean %f
   smudge = git media smudge %f
@@ -195,7 +199,9 @@
 	clean = git-lfs clean -- %f
 
 [difftool]
+
 	prompt = true
 [pager]
+
 	branch = false
 	tags = false
