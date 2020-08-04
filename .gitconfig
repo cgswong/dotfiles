@@ -128,8 +128,6 @@
 
   helper = !aws codecommit credential-helper $@
   UseHttpPath = true
-  # helper = --show
-  # helper = osxkeychain
 
 [diff]
 
@@ -184,15 +182,18 @@
   insteadOf = "gist:"
 
 [user]
+
   name = Stuart Wong
   email = cgs.wong@gmail.com
 
 [filter "hawser"]
+
   clean = git hawser clean %f
   smudge = git hawser smudge %f
   required = true
 
 [filter "lfs"]
+
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
@@ -201,6 +202,7 @@
 [difftool]
 
   prompt = true
+
 [pager]
 
   branch = false
