@@ -86,6 +86,7 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   # Enable pyenv if installed
   if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
   fi
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
