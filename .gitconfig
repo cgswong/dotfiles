@@ -207,3 +207,5 @@
 
   branch = false
   tags = false
+[pull]
+	rebase = false
