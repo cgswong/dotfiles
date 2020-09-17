@@ -25,7 +25,6 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 
 ## Programming paths
 # Go environment
-[[ ! -d ${HOME}/devel/go ]] && mkdir "$HOME/devel/go"
 [[ -d ${HOME}/devel/go ]] && export GOPATH=${GOPATH:=$HOME/devel/go}
 
 # Python virtual environments
@@ -43,8 +42,6 @@ if which rbenv &>/dev/null; then  eval "$(rbenv init -)"; fi
 if which pipenv &>/dev/null; then  eval "$(pipenv --completion)"; fi
 
 if [[ "${SHELL_NAME}" == "bash" ]]; then
-  export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
-
   # Enable some Bash 4 features when possible:
   # autocd: e.g. `**/qux` will enter `./foo/bar/baz/qux`
   # cdspell: Autocorrect typos in path names when using `cd`
