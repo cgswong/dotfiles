@@ -16,14 +16,14 @@ else
 fi
 
 # Flush Directory Service cache
-which dscacheutil &>/dev/null && alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+command -v dscacheutil &>/dev/null && alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 [[ $(uname -a) != "Linux"* ]] && alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 # View HTTP traffic
-which ngrep &>/dev/null && alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-which tcpdump &>/dev/null &&  alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+command -v ngrep &>/dev/null && alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+command -v tcpdump &>/dev/null &&  alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
@@ -60,8 +60,8 @@ fi
 [[ $(uname -a) != "Linux"* ]] && alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
 # Disable/enable Spotlight
-which mdutil &>/dev/null && alias spotoff="sudo mdutil -a -i off"
-which mdutil &>/dev/null && alias spoton="sudo mdutil -a -i on"
+command -v mdutil &>/dev/null && alias spotoff="sudo mdutil -a -i off"
+command -v mdutil &>/dev/null && alias spoton="sudo mdutil -a -i on"
 
 # PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
 [[ -f "/usr/libexec/PlistBuddy" ]] && alias plistbuddy="/usr/libexec/PlistBuddy"
