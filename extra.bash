@@ -32,14 +32,14 @@ export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
 [[ -d ${HOME}/devel ]] && export PROJECT_HOME=${HOME}/devel
 
 # Link Brew Cask applications to normal location
-if which brew &>/dev/null; then  export HOMEBREW_CASK_OPTS="--appdir=/Applications"; fi
+command -V brew &>/dev/null && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 ## TAB completion
 # Load Ruby's rbenv
-if which rbenv &>/dev/null; then  eval "$(rbenv init -)"; fi
+command -V rbenv &>/dev/null && eval "$(rbenv init -)"
 
 # Load Pipenv autocompletion
-if which pipenv &>/dev/null; then  eval "$(pipenv --completion)"; fi
+command -V pipenv &>/dev/null &&  eval "$(pipenv --completion)"
 
 if [[ "${SHELL_NAME}" == "bash" ]]; then
   # Enable some Bash 4 features when possible:
@@ -84,7 +84,7 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   fi
 
   # Enable pyenv if installed
-  if command -v pyenv 1>/dev/null 2>&1; then
+  if command -v pyenv &>/dev/null; then
     eval "$(pyenv init -)"
   fi
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
@@ -97,7 +97,7 @@ elif [[ "${SHELL_NAME}" == "zsh" ]]; then
 fi
 
 # direnv execution
-if which direnv &> /dev/null; then  eval "$(direnv hook ${SHELL_NAME})"; fi
+command -V direnv &>/dev/null && eval "$(direnv hook ${SHELL_NAME})"
 
 # Google Cloud shell command completion
 [[ -f ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc ]] && . ${HOME}/gcloud/google-cloud-sdk/path.${SHELL_NAME}.inc &>/dev/null
