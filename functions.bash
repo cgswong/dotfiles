@@ -99,7 +99,7 @@ function server() {
 
 # Start a PHP server from a directory, optionally specifying the port
 # (Requires PHP 5.4.0+.)
-if which php &>/dev/null; then
+if command -V php &>/dev/null; then
   function phpserver() {
     local port="${1:-4000}";
     local ip=$(ipconfig getifaddr en1);
@@ -132,7 +132,7 @@ function escape() {
 }
 
 # Decode \x{ABCD}-style Unicode escape sequences
-if which perl &>/dev/null; then
+if command -V perl &>/dev/null; then
   function unidecode() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
     # print a newline unless we’re piping the output to another program
@@ -143,7 +143,7 @@ if which perl &>/dev/null; then
 fi
 
 # Get a character’s Unicode code point
-if which perl &>/dev/null; then
+if command -V perl &>/dev/null; then
   function codepoint() {
     perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
     # print a newline unless we’re piping the output to another program
@@ -195,7 +195,7 @@ function tre() {
 }
 
 # Set AWS environemnt variables from ~/.aws/[config | credentials]
-if which awsenv &>/dev/null; then
+if command -V awsenv &>/dev/null; then
   function setaws() {
     eval $(awsenv $1)
   }
