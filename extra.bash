@@ -120,3 +120,8 @@ command -V direnv &>/dev/null && eval "$(direnv hook ${SHELL_NAME})"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME} ] && . /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME}
+
+# NVM Configuration
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
