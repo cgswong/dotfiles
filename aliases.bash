@@ -93,4 +93,4 @@ alias reload="exec $SHELL -l"
 [[ "$SHELL" == *"zsh" ]] && unalias _
 
 # Colorize `cat`
-alias cat="pygmentize -g"
+alias ccat="pygmentize -g"
