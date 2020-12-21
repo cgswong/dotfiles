@@ -1,0 +1,9 @@
+cfn-tools>=0.1.6
+cloudformation-cli-python-plugin>=2.1.2
+git-remote-codecommit>=1.15.1
+kube-shell>=0.0.23
+pip>=20.2.4
+pip-upgrade-outdated>=1.5
+Pygments>=2.7.2
+setuptools>=50.3.2
+virtualenv==20.2.1
