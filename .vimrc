@@ -183,5 +183,5 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
-" Show problematic characters.
-set list
+" set list                          " Show problematic characters
+set nolist                        " Hide hidden characters
