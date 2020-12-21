@@ -92,5 +92,6 @@ alias reload="exec $SHELL -l"
 # Unalias _='sudo' for zsh
 [[ "$SHELL" == *"zsh" ]] && unalias _
 
-# Colorize `cat`
+# Colorized `cat`
 alias ccat="pygmentize -g"
+alias catc="highlight -O ansi --force"
