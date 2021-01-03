@@ -87,13 +87,22 @@ let mapleader=","
 autocmd FileType binary setlocal noeol
 
 " Centralize backups, swapfiles and undo history
+if !isdirectory("~/.vim/backup")
+  silent !mkdir -p ~/.vim/backup
+endif
 if exists("&backupdir")
   set backupdir=~/.vim/backup
 endif
 " No backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
+if !isdirectory("~/.vim/swap")
+  silent !mkdir -p ~/.vim/swap
+endif
 if exists("&directory")
   set directory=~/.vim/swap
+endif
+if !isdirectory("~/.vim/undo")
+  silent !mkdir -p ~/.vim/undo
 endif
 if exists("&undodir")
   set undodir=~/.vim/undo
