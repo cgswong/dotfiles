@@ -28,6 +28,14 @@ export AWS_CLI_AUTO_PROMPT=on
 export AWS_RETRY_MODE=standard
 export AWS_STS_REGIONAL_ENDPOINTS=regional
 
+# AWS CLI completion
+if [[ -f /usr/local/bin/aws_completer ]]; then
+  complete -C '/usr/local/bin/aws_completer' aws
+elif [[ -f ${HOME}/.local/bin/aws_completer ]]; then
+  complete -C "${HOME}/.local/bin/aws_completer" aws
+fi
+
+
 # Kubernetes
 [[ -f "${HOME}/.kube/config" ]] && export KUBECONFIG=${KUBECONFIG:=$HOME/.kube/config}
 
@@ -71,13 +79,6 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   # You could just use `-g` instead, but I like being explicit
   complete -W "NSGlobalDomain" defaults;
 
-  # AWS shell command completion
-  if [[ -f /usr/local/bin/aws_completer ]]; then
-    complete -C '/usr/local/bin/aws_completer' aws
-  elif [[ -f ${HOME}/.local/bin/aws_completer ]]; then
-    complete -C "${HOME}/.local/bin/aws_completer" aws
-  fi
-
   # SSH hostnames
   [[ -f ${BASH_COMPLETION_COMPAT_DIR}/ssh ]] && . ${BASH_COMPLETION_COMPAT_DIR}/ssh &>/dev/null
 
@@ -98,9 +99,6 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
   fi
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
-  # AWS shell command completion
-  [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && . /usr/local/bin/aws_zsh_completer.sh &>/dev/null
-
   # SSH hostnames
   [[ -f /usr/local/share/zsh-completions/_ssh ]] && . /usr/local/share/zsh-completions/_ssh
 fi
