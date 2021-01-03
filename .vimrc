@@ -1,63 +1,123 @@
-" Install Vundle if not found
-if empty(glob('~/.vim/bundle/Vundle.vim'))
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" Install vim-packager if not found
+if empty(glob('~/.vim/pack/packager/opt/vim-packaer'))
+  silent !mkdir -p ~/.vim/pack/packager/opt
+  silent !git clone --depth=1 --quiet https://github.com/kristijanhusak/vim-packager ~/.vim/pack/packager/opt/vim-packager
+  autocmd VimEnter * silent !PackagerInstall | echo "vim-packager: INSTALLED"
 endif
 
-if !empty(glob("~/.vim/bundle/Vundle.vim"))
-  " Vundle required
+" Setup vim-packager
+if &compatible
   set nocompatible
-  filetype off
+endif
+
+function! s:packager_init(packager) abort
+  call a:packager.add('kristijanhusak/vim-packager', { 'type': 'opt' })
+  call a:packager.add('junegunn/fzf', { 'do': './install --all && ln -s $(pwd) ~/.fzf'})
+  call a:packager.add('junegunn/fzf.vim')
+  call a:packager.add('Shougo/deoplete.nvim')
+  call a:packager.add('autozimu/LanguageClient-neovim', { 'do': 'bash install.sh' })
+  call a:packager.add('morhetz/gruvbox')
+  call a:packager.add('hrsh7th/vim-vsnip-integ', {'requires': ['hrsh7th/vim-vsnip'] })
+  call a:packager.add('flazz/vim-colorschemes')
+  call a:packager.add('wincent/command-t')
+  call a:packager.add('kien/ctrlp.vim')
+  call a:packager.add('scrooloose/nerdtree')
+  call a:packager.add('itchyny/lightline.vim')
+  call a:packager.add('tpope/vim-dispatch')
+  call a:packager.add('dhruvasagar/vim-table-mode')
+  call a:packager.add('vim-pandoc/vim-pandoc')
+  call a:packager.add('vim-pandoc/vim-pandoc-syntax')
+  call a:packager.add('gabrielelana/vim-markdown')
+  call a:packager.add('airblade/vim-gitgutter')
+  call a:packager.add('editorconfig/editorconfig-vim')
+  call a:packager.add('nathanaelkane/vim-indent-guides')
+  call a:packager.add('tomtom/tcomment_vim')
+  call a:packager.add('tpope/vim-fugitive')
+  "call a:packager.add('lewis6991/gitsigns.nvim', {'requires': 'nvim-lua/plenary.nvim'})
+  "call a:packager.add('vim-airline/vim-airline')
+  "call a:packager.add('vim-airline/vim-airline-themes')
+  "call a:packager.local('~/my_vim_plugins/my_awesome_plugin')
+
+  " Provide full URL; useful if you want to clone from somewhere else than Github.
+  "call a:packager.add('https://my.other.public.git/tpope/vim-fugitive.git')
+
+  "Provide SSH-based URL; useful if you have write access to a repository and wish to push to it
+  "call a:packager.add('git@github.com:mygithubid/myrepo.git')
+
+  "Loaded only for specific filetypes on demand. Requires autocommands below.
+  call a:packager.add('kristijanhusak/vim-js-file-import', { 'do': 'npm install', 'type': 'opt' })
+  call a:packager.add('fatih/vim-go', { 'do': ':GoInstallBinaries', 'type': 'opt' })
+  call a:packager.add('sonph/onehalf', {'rtp': 'vim/'})
+  call a:packager.add('elzr/vim-json', { 'type': 'opt' })
+  call a:packager.add('ekalinin/Dockerfile.vim', { 'type': 'opt' })
+  call a:packager.add('powerline/powerline', { 'type': 'opt' })
+  "call a:packager.add('neoclide/coc.nvim', { 'do': function('InstallCoc') })
+  "call a:packager.add('haorenW1025/completion-nvim', {'requires': [
+  "\ ['nvim-treesitter/completion-treesitter', {'requires': 'nvim-treesitter/nvim-treesitter'}],
+  "\ {'name': 'steelsojka/completion-buffers', 'opts': {'type': 'opt'}},
+  "\ 'kristijanhusak/completion-tags',
+  "\ ]})
+endfunction
+
+packadd vim-packager
+call packager#setup(function('s:packager_init'))
+
+" Install Vundle if not found
+"if empty(glob('~/.vim/bundle/Vundle.vim'))
+"  silent !mkdir -p ~/.vim/bundle
+"  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"endif
+
+"if !empty(glob("~/.vim/bundle/Vundle.vim"))
+  " Vundle required
+"  set nocompatible
+"  filetype off
 
   " Set the runtime path to include Vundle and initialize
-  set rtp+=~/.vim/bundle/Vundle.vim
+"  set rtp+=~/.vim/bundle/Vundle.vim
   " Keep Plugin commands between vundle#begin/end.
-  call vundle#begin()
+"  call vundle#begin()
   " Alternatively, pass a path where Vundle should install plugins
   "call vundle#begin('~/.vim/vundle')
 
   " Let Vundle manage Vundle, required
-  Plugin 'VundleVim/Vundle.vim'
+"  Plugin 'VundleVim/Vundle.vim'
 
-  Plugin 'L9'
-  Plugin 'flazz/vim-colorschemes'
+"  Plugin 'flazz/vim-colorschemes'
 
   " File management
-  Plugin 'abolish.vim'
-  Plugin 'git://git.wincent.com/command-t.git'
-  Plugin 'kien/ctrlp.vim'
-  Plugin 'scrooloose/nerdtree'
+"  Plugin 'git://git.wincent.com/command-t.git'
+"  Plugin 'kien/ctrlp.vim'
+"  Plugin 'scrooloose/nerdtree'
 
   " Status line
-  Plugin 'itchyny/lightline.vim'
+"  Plugin 'itchyny/lightline.vim'
   "Plugin 'vim-airline/vim-airline'
   "Plugin 'vim-airline/vim-airline-themes'
-  "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
   " Build and test
-  Plugin 'vim-dispatch'
+"  Plugin 'vim-dispatch'
 
   " Docs
-  Plugin 'dhruvasagar/vim-table-mode'
-  Plugin 'elzr/vim-json'
-  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-  Plugin 'vim-pandoc/vim-pandoc'
-  Plugin 'vim-pandoc/vim-pandoc-syntax'
-  Bundle 'gabrielelana/vim-markdown'
+"  Plugin 'dhruvasagar/vim-table-mode'
+"  Plugin 'elzr/vim-json'
+"  Plugin 'vim-pandoc/vim-pandoc'
+"  Plugin 'vim-pandoc/vim-pandoc-syntax'
+"  Bundle 'gabrielelana/vim-markdown'
 
   " Development
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'editorconfig-vim'
-  Plugin 'nathanaelkane/vim-indent-guides'
-  Plugin 'tomtom/tcomment_vim'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'ekalinin/Dockerfile.vim'
+"  Plugin 'airblade/vim-gitgutter'
+"  Plugin 'editorconfig/editorconfig-vim'
+"  Plugin 'nathanaelkane/vim-indent-guides'
+"  Plugin 'tomtom/tcomment_vim'
+"  Plugin 'tpope/vim-fugitive'
+"  Plugin 'ekalinin/Dockerfile.vim'
 
   " All Vundle plugins must be added before the following line
-  call vundle#end()
+"  call vundle#end()
 
   " Enable filetype-specific plugins and indenting
-  filetype indent plugin on
+"  filetype indent plugin on
 
   " Enable indent guides
   "let g:indent_guides_enable_on_vim_startup = 1
@@ -65,17 +125,17 @@ if !empty(glob("~/.vim/bundle/Vundle.vim"))
   "let g:indent_guides_guide_size = 1
 
   " Use '|' for table ends
-  let g:table_mode_corner="|"
+"  let g:table_mode_corner="|"
 
   " Brief help
   " :PluginList       - lists configured plugins
   " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
   " :PluginSearch foo - searches for foo; append `!` to refresh local cache
   " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-  "
+
   " see :h vundle for more details or wiki for FAQ
   " Put non-Plugin stuff after this line
-endif
+"endif
 
 " Use theme
 "colorscheme visualstudio
