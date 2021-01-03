@@ -9,6 +9,9 @@ export CLICOLOR_FORCE=1
 # Set default text editor
 export EDITOR=vim
 
+# Set default less config
+export LESS="-FRX"
+
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
 
@@ -19,6 +22,11 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 # Set environment for AWS access
 export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-"us-east-1"}
 export AWS_CREDENTIAL_FILE="${HOME}/.aws/credentials"
+export AWS_PAGER="less"
+export AWS_DEFAULT_OUTPUT="yaml"
+export AWS_CLI_AUTO_PROMPT=on
+export AWS_RETRY_MODE=standard
+export AWS_STS_REGIONAL_ENDPOINTS=regional
 
 # Kubernetes
 [[ -f "${HOME}/.kube/config" ]] && export KUBECONFIG=${KUBECONFIG:=$HOME/.kube/config}
