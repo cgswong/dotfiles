@@ -150,3 +150,5 @@ rvm_silence_path_mismatch_check_flag=1
 unset npm
 # end hack
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
