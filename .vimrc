@@ -1,73 +1,81 @@
-" Vundle required
-set nocompatible
-filetype off
+" Install Vundle if not found
+if empty(glob('~/.vim/bundle/Vundle.vim'))
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+endif
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-" Keep Plugin commands between vundle#begin/end.
-call vundle#begin()
-" Alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/.vim/vundle')
+if !empty(glob("~/.vim/bundle/Vundle.vim"))
+  " Vundle required
+  set nocompatible
+  filetype off
 
-" Let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+  " Set the runtime path to include Vundle and initialize
+  set rtp+=~/.vim/bundle/Vundle.vim
+  " Keep Plugin commands between vundle#begin/end.
+  call vundle#begin()
+  " Alternatively, pass a path where Vundle should install plugins
+  "call vundle#begin('~/.vim/vundle')
 
-Plugin 'L9'
-Plugin 'flazz/vim-colorschemes'
+  " Let Vundle manage Vundle, required
+  Plugin 'VundleVim/Vundle.vim'
 
-" File management
-Plugin 'abolish.vim'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
+  Plugin 'L9'
+  Plugin 'flazz/vim-colorschemes'
 
-" Status line
-Plugin 'itchyny/lightline.vim'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+  " File management
+  Plugin 'abolish.vim'
+  Plugin 'git://git.wincent.com/command-t.git'
+  Plugin 'kien/ctrlp.vim'
+  Plugin 'scrooloose/nerdtree'
 
-" Build and test
-Plugin 'vim-dispatch'
+  " Status line
+  Plugin 'itchyny/lightline.vim'
+  "Plugin 'vim-airline/vim-airline'
+  "Plugin 'vim-airline/vim-airline-themes'
+  "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
-" Docs
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'elzr/vim-json'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Bundle 'gabrielelana/vim-markdown'
+  " Build and test
+  Plugin 'vim-dispatch'
 
-" Development
-Plugin 'airblade/vim-gitgutter'
-Plugin 'editorconfig-vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ekalinin/Dockerfile.vim'
+  " Docs
+  Plugin 'dhruvasagar/vim-table-mode'
+  Plugin 'elzr/vim-json'
+  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+  Plugin 'vim-pandoc/vim-pandoc'
+  Plugin 'vim-pandoc/vim-pandoc-syntax'
+  Bundle 'gabrielelana/vim-markdown'
 
-" All Vundle plugins must be added before the following line
-call vundle#end()
+  " Development
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'editorconfig-vim'
+  Plugin 'nathanaelkane/vim-indent-guides'
+  Plugin 'tomtom/tcomment_vim'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'ekalinin/Dockerfile.vim'
 
-" Enable filetype-specific plugins and indenting
-filetype indent plugin on
+  " All Vundle plugins must be added before the following line
+  call vundle#end()
 
-" Enable indent guides
-"let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_color_change_percent = 3
-"let g:indent_guides_guide_size = 1
+  " Enable filetype-specific plugins and indenting
+  filetype indent plugin on
 
-" Use '|' for table ends
-let g:table_mode_corner="|"
+  " Enable indent guides
+  "let g:indent_guides_enable_on_vim_startup = 1
+  "let g:indent_guides_color_change_percent = 3
+  "let g:indent_guides_guide_size = 1
 
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put non-Plugin stuff after this line
+  " Use '|' for table ends
+  let g:table_mode_corner="|"
+
+  " Brief help
+  " :PluginList       - lists configured plugins
+  " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+  " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+  " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+  "
+  " see :h vundle for more details or wiki for FAQ
+  " Put non-Plugin stuff after this line
+endif
 
 " Use theme
 "colorscheme visualstudio
