@@ -77,9 +77,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(copydir copyfile dircycle docker docker-compose docker-machine git git-flow git-prompt gitignore helm history httpie jsontools kubectl npm osx pipenv pyenv terraform themes tmux virtualenv z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(copydir copyfile dircycle docker docker-compose docker-machine git git-flow git-prompt gitignore helm history httpie jsontools kubectl npm osx pipenv poetry pyenv terraform themes tmux virtualenv z zsh-autosuggestions zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+[[ -f $ZSH/oh-my-zsh.sh ]] && ZSH_DISABLE_COMPFIX=true source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -110,6 +110,12 @@ alias ohmyzsh="vim ~/.oh-my-zsh"
 # Run appropriate theme configuration
 case $ZSH_THEME in
   "powerlevel10k/powerlevel10k")
+    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+    # Initialization code that may require console input (password prompts, [y/n]
+    # confirmations, etc.) must go above this block; everything else may go below.
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
     # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
     [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
   ;;
@@ -127,8 +133,15 @@ esac
 # uninstall by removing these lines or running `tabtab uninstall yo`
 [[ -f /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
 
+# Poetry completion
+fpath+=~/.zfunc
+
 # AWS CLI completion
+autoload -Uz compinit
 autoload bashcompinit && bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
+[[ -f /usr/local/bin/aws_completer ]] && complete -C '/usr/local/bin/aws_completer' aws
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+export PATH=$HOME/.toolbox/bin:$PATH

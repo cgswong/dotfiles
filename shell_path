@@ -20,6 +20,7 @@ pathmunge () {
 [[ -d ${HOME}/.local/bin ]] && pathmunge ${HOME}/.local/bin
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin
 [[ -d ${HOME}/.ebcli-virtual-env/executables ]] && pathmunge ${HOME}/.ebcli-virtual-env/executables
+[[ -d ${HOME}/.poetry/bin ]] && pathmunge ${HOME}/.poetry/bin
 # Homebrew coreutils
 [[ -d /usr/local/opt/coreutils/libexec/gnubin ]] && pathmunge /usr/local/opt/coreutils/libexec/gnubin after
 # Add rbenv to PATH so that it loads every time you open a terminal
