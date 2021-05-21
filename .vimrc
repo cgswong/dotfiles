@@ -1,5 +1,5 @@
 " Install vim-packager if not found
-if empty(glob('~/.vim/pack/packager/opt/vim-packaer'))
+if empty(glob('~/.vim/pack/packager/opt/vim-packager'))
   silent !mkdir -p ~/.vim/pack/packager/opt
   silent !git clone --depth=1 --quiet https://github.com/kristijanhusak/vim-packager ~/.vim/pack/packager/opt/vim-packager
   autocmd VimEnter * silent !PackagerInstall | echo "vim-packager: INSTALLED"
