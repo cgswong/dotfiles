@@ -10,9 +10,11 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 if [[ $(uname -a) != "Linux"* ]]; then
-  alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo -H gem update'
+  alias update='sudo softwareupdate -i -a; brew update; brew upgrade --quiet; npm install npm -g; npm update -g --silent'
+  # No permissions to /usr/bin in Big Sur
+  #alias update='sudo softwareupdate -i -a; brew update; brew upgrade --quiet; npm install npm -g; npm update -g --silent; sudo gem update --system; sudo -H gem update'
 else
-  alias update='brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo -H gem update'
+  alias update='brew update; brew upgrade --quiet; npm install npm -g; npm update -g --silent; sudo gem update --system; sudo -H gem update'
 fi
 
 # Flush Directory Service cache
@@ -94,3 +96,7 @@ alias reload="exec $SHELL -l"
 
 # Colorize `cat`
 alias ccat="pygmentize -g"
+
+# Use Podman for Docker
+[[ -f /usr/local/bin/podman ]] && alias docker=/usr/local/bin/podman
+
