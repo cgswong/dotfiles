@@ -55,7 +55,8 @@ command -V brew &>/dev/null && export HOMEBREW_CASK_OPTS="--appdir=/Applications
 command -V rbenv &>/dev/null && eval "$(rbenv init -)"
 
 # Load Pipenv autocompletion
-command -V pipenv &>/dev/null &&  eval "$(pipenv --completion)"
+## Load as Oh My Zsh plugin
+#command -V pipenv &>/dev/null &&  eval "$(pipenv --completion)"
 
 if [[ "${SHELL_NAME}" == "bash" ]]; then
   # Enable some Bash 4 features when possible:
@@ -128,6 +129,7 @@ command -V direnv &>/dev/null && eval "$(direnv hook ${SHELL_NAME})"
 [ -f /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME} ] && . /Users/carrwong/node_modules/tabtab/.completions/slss.${SHELL_NAME}
 
 # NVM Configuration
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+## Load as Oh My Zsh plugin
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

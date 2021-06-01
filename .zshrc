@@ -77,7 +77,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(copydir copyfile dircycle docker docker-compose docker-machine git git-flow git-prompt gitignore helm history httpie jsontools kubectl npm osx pipenv poetry pyenv terraform themes tmux virtualenv z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(copydir copyfile dircycle docker docker-compose git git-flow git-prompt gitignore helm history httpie jsontools kubectl npm nvm osx pipenv poetry pyenv terraform themes tmux virtualenv z zsh-autosuggestions zsh-syntax-highlighting)
 
 [[ -f $ZSH/oh-my-zsh.sh ]] && ZSH_DISABLE_COMPFIX=true source $ZSH/oh-my-zsh.sh
 

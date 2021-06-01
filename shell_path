@@ -26,8 +26,11 @@ pathmunge () {
 # Add rbenv to PATH so that it loads every time you open a terminal
 [[ -d ${HOME}/.rbenv/bin ]] && pathmunge ${HOME}/.rbenv/bin
 # Add pyenv to PATH so that it loads every time you open a terminal
-[[ -d ${HOME}/.pyenv/bin ]] && pathmunge ${HOME}/.pyenv/bin
-[[ -d ${HOME}/.pyenv/shims ]] && pathmunge ${HOME}/.pyenv/shims
+if [[ -d ${HOME}/.pyenv/bin ]]; then
+  export PYENV_ROOT="${HOME}/.pyenv"
+  pathmunge ${HOME}/.pyenv/bin
+  eval "$(pyenv init --path)"
+fi
 # Add krew to PATH
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin
 # Add Okta AWS CLI plugin
