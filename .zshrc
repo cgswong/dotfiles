@@ -133,9 +133,6 @@ esac
 # uninstall by removing these lines or running `tabtab uninstall yo`
 [[ -f /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /usr/local/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
 
-# Poetry completion
-fpath+=~/.zfunc
-
 # AWS CLI completion
 autoload -Uz compinit
 autoload bashcompinit && bashcompinit
@@ -143,5 +140,3 @@ autoload bashcompinit && bashcompinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-export PATH=$HOME/.toolbox/bin:$PATH

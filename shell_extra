@@ -98,6 +98,10 @@ if [[ "${SHELL_NAME}" == "bash" ]]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
   fi
+
+  # Poetry completion
+  ## Leave for plugin
+  #fpath+=~/.zfunc
 elif [[ "${SHELL_NAME}" == "zsh" ]]; then
   ## zsh
   # SSH hostnames

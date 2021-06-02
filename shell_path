@@ -28,9 +28,10 @@ pathmunge () {
 # Add pyenv to PATH so that it loads every time you open a terminal
 if [[ -d ${HOME}/.pyenv/bin ]]; then
   export PYENV_ROOT="${HOME}/.pyenv"
-  pathmunge ${HOME}/.pyenv/bin
+  pathmunge ${PYENV_ROOT}/bin
   eval "$(pyenv init --path)"
 fi
+[[ -d $(pyenv root)/shims ]] && pathmunge $(pyenv root)/shims
 # Add krew to PATH
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin
 # Add Okta AWS CLI plugin
